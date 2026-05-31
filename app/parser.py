@@ -41,7 +41,7 @@ def collect_courses(pages=5):
 
 
 if __name__ == "__main__":
-    courses = collect_courses(100)
+    courses = collect_courses(300)
 
     df = pd.DataFrame(courses)
 

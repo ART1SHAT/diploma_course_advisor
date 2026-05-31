@@ -21,20 +21,28 @@ categories = {
 
     "Data Science": [
         "data science",
+        "data scientist",
+        "аналитик данных",
+        "анализ данных",
+        "data analyst",
         "machine learning",
-        "data analysis",
+        "ml",
         "numpy",
+        "pandas",
+        "sklearn",
+        "scikit",
         "matplotlib",
-        "statistics"
+        "seaborn"
     ],
 
-    "Artificial Intelligence": [
-        "artificial intelligence",
+   "Artificial Intelligence": [
         "ai",
-        "нейрон",
+        "artificial intelligence",
         "нейросеть",
-        "gpt",
+        "нейронная сеть",
         "llm",
+        "gpt",
+        "chatgpt",
         "transformer"
     ],
 
@@ -150,10 +158,12 @@ categories = {
 
     "Databases": [
         "sql",
+        "postgres",
         "postgresql",
         "mysql",
         "mongodb",
-        "database"
+        "database",
+        "база данных"
     ],
 
     "Business Analytics": [

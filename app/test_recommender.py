@@ -11,7 +11,9 @@ print(
         [
             "title",
             "category",
-            "similarity"
+            "similarity",
+            "bonus",
+            "final_score"
         ]
     ]
 )
