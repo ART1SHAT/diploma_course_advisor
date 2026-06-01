@@ -1,0 +1,1730 @@
+[
+  {
+    "id": "stepik_0",
+    "title": "Golang: 1046 реальных задач с собесов",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 100.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "go"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289649",
+    "description": "to be updated",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Python для начинающих",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289612",
+    "description": "Курс предназначен для заинтересованных в изучении языка программирования Python с самого нуля и до уверенного уровня, позволяющего создавать собственные скрипты, обрабатывать данные и автоматизировать рутинные задачи.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "'Основы Python: первые шаги",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289586",
+    "description": "Курс «Основы Python для новичков» — ваш легкий старт в программировании. Python — самый популярный и понятный язык в мире, который используют в веб-разработке, анализе данных и создании нейросетей.Курс создан для абсолютных новичков без опыта в IT. Обучение построено на практике: минимум скучной теории и максимум реальных задач. Благодаря автоматическому тренажеру Stepik, вы будете писать код прямо в браузере и мгновенно получать проверку. Вы освоите синтаксис, переменные, циклы и списки. Начните учиться.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Meme English: учись с юмором",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289575",
+    "description": "Hey, buddy! 👋\nЭтот курс — Memes English: учим английский через мемы, рилсы, TikTok, стендапы и интернет-сленг. Забудь скучные учебники — здесь реальный английский, как его используют в интернете",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Фундамент DevOps",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 7990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "devops"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289494",
+    "description": "Этот пакет курсов шаг за шагом проведёт вас через ключевые концепции Devops, начиная с самых основ. Всё доступно, наглядно и с практикой.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Python: Антикризисный FastAPI",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 2990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289489",
+    "description": "Пишем полноценный REST API на FastAPI — от приложения в один файл до production-ready сервиса с базой данных, авторизацией, тестами и хранилищем файлов. Один коммит — один шаг: видно, как сервис растёт строчка за строчкой, на реальном проекте, а не на очередном «Hello World». Курс для тех, кто уже знает базу Python и хочет наконец написать что-то серьёзное",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Kotlin для новичков",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "mobile development"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289399",
+    "description": "Курс Kotlin для начинающих: синтаксис, типы, null-safety, ООП, корутины, коллекции. Теория, разбор примеров и задачи с автопроверкой.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "JavaScript для новичков",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "web development"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289398",
+    "description": "Курс современного JavaScript: переменные, типы, функции, объекты, DOM, асинхронность, модули. Теория, разбор примеров и задачи с автопроверкой.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "C++ для новичков",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "c++"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289397",
+    "description": "Современный C++ для начинающих: синтаксис, типы, указатели, ссылки, классы, STL, шаблоны. Теория, разбор примеров, задачи с автопроверкой.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "C# для новичков",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "c#"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289396",
+    "description": "Курс C# для начинающих: синтаксис, типы, ООП, исключения, коллекции и LINQ. Теория, примеры и задачи с автопроверкой на .NET.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Python для новичков",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289395",
+    "description": "Полный курс Python для начинающих. От синтаксиса и переменных — до ООП, исключений и работы с файлами. Теория, примеры, задачи с автопроверкой.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Машинное обучение для новичков",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 1990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289360",
+    "description": "Полный практический курс по машинному обучению для тех, кто только начинает. От базовой математики и Python — к классическим алгоритмам, нейросетям и ML в продакшене. Теория, примеры, разбор реальных кейсов, тесты.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Машинное обучение для новичков",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289359",
+    "description": "Полный практический курс по машинному обучению для тех, кто только начинает. От базовой математики и Python — к классическим алгоритмам, нейросетям и ML в продакшене. Теория, примеры, разбор реальных кейсов, тесты.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Автоматизация тестирования ПО на Java. Selenium + REST Assured",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 6299.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "java"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289358",
+    "description": "🏅 Победитель Stepik Awards в номинации \"Прорыв года\"\r\nДОМАШНИЕ ЗАДАНИЯ ПРОВЕРЯЮТСЯ ЛИЧНО АВТОРОМ + задачи на программирование и тестов!\r\nДанный курс подходит для тех, кто желает изучить программирование на Java, а так же освоить очень востребованную и высокооплачиваемую профессию Тестировщика-автоматизатора, используя популярные инструменты для тестирования Selenium и REST Assured! Так же он подойдет для тех кто уже работает тестировщиком или в сфере IT.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Задачи Python по уровням",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "advanced"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289352",
+    "description": "Курс — коллекция задач по Python для 8–11 классов. Без теории, без лекций. Только практика.\n\nЧто внутри:\nРазделение на уровни сложности: «Базовый» (алгоритмы и переменные), «Средний» (циклы, списки, функции), «Продвинутый» (вложенные структуры, срезы, генераторы, рекурсия).\n\nДля кого:\nУчитель выдаёт готовую ссылку — ученик решает в своём темпе, система проверяет сама.\n\nРезультат:\nУченик напишет 50+ программ.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "UX/UI-дизайн сайта-визитки",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 1990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "design"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289343",
+    "description": "Курс для начинающих под руководством арт-директора и проверкой домашних заданий.\n\nОт арт-директора:\n«Привет! Я на своём проекте расскажу и покажу тебе все шаги дизайна. Но проектировать и рисовать ты будешь свой, совершенно индивидуальный дизайн, который сможешь положить себе в портфолио».",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "English for visual communication",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "en",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289306",
+    "description": "Курс English for visual communication\" предназначен для студентов колледжей 1‑го курса. Программа построена по модульному принципу: каждый модуль охватывает три типа визуального контента — статичные изображения, динамические изображения и видеоматериалы. Обучение начинается с входной диагностики уровня визуальной грамотности, продолжается практическими заданиями в рамках обучающего блока и завершается контрольной диагностикой для фиксации достигнутых результатов. ",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Основы ООП в python: практический курс",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 1990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289256",
+    "description": "Объектно-ориентированное программирование - важный инструмент для каждого разработчика. Оно позволяет сделать код короче, понятнее и структурированнее. ООП - это способ преобразовать множество данных в единое целое и решать задачи быстро, понятно, избегая путаницы и ошибок.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Введение в SQL вместе с Лисом Квери",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "databases"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289203",
+    "description": "Бобёр хранил данные на бересте. Замёрз и ел кору. Не повторяй его ошибку  —  учись SQL с Лисом Квери.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "UX-дизайн для новичков",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "design"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289200",
+    "description": "Курс посвящен основам UX-дизайна и проектирования удобных пользовательских интерфейсов для веб-сайтов.\nВ рамках курса рассматриваются: основы пользовательского опыта, анализ потребностей пользователей, построение пользовательских сценариев, принципы удобного интерфейса\n",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Linux c нуля: работа в командной строке",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "devops"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289186",
+    "description": "Практический старт в мир Linux без теории ради теории. Вы с нуля развернёте свой тестовый полигон на Ubuntu Server, подключитесь к нему по SSH и освоите 80% самых нужных команд для реальной работы. Курс идеален для тех, кто боится «чёрного окна терминала» — после него вы будете в нём ориентироваться уверенно.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "\"Мульти-курс\": программирование для начинающих",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289162",
+    "description": "Данный курс учит основам программирования на популярных языках: Python C C# C++ Java JavaScript Go PHP SQL HTML CSS Bash Git Pascal Swift Kotlin 1C Objective-C TypeScript Scala Assembly R Dart VBA Lua Rust GDScript F# Kumir Scratch. Данный курс первый, содержащий 30 языков программирования. Данный курс самый большой на платформе Stepik. Данный курс отлично подойдёт тем, кто хочет начать свой путь в IT, но не знает с чего начать. Данный курс поможет вам выбрать тот язык программирования, который вам по душе.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "AI QA Start: тестирование LLM и AI-ботов на Python",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 3490.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289084",
+    "description": "Практический курс по тестированию AI-ботов, LLM-приложений и AI-агентов с Python, pytest, promptfoo и DeepEval. Курс можно начать в mock-режиме без облачного API. ",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Machine Learning для самых маленьких",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "data science"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289071",
+    "description": "Курс дает практические основы машинного обучения.\n",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Easy English",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289069",
+    "description": "Мини-курс по основам лексики и грамматики английского для взрослых без знания языка. 4 блока с теорией и практикой и итоговое задание!\n",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Java. Подготовка к собеседованию: Коллекции и Дженерики",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "advanced"
+    ],
+    "competencies": [
+      "artificial intelligence"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289065",
+    "description": "🎯 Продвинутый курс‑тренажёр для разработчиков уровня Middle и выше.\nПерестаньте бояться секции Collections/Generics на техническом собеседовании.\n\n📚 Что разбираем:\n• Внутреннее устройство HashMap, TreeMap, LinkedHashMap\n• Контракты equals/hashCode и compareTo\n• Fail‑fast и fail‑safe коллекции\n• Wildcards, PECS и стирание типов\n• Code Review production‑кода и mock‑интервью\n\n💬 Все вопросы, задачи и разборы основаны на реальных собеседованиях (EPAM, Т1 и компании того же уровня).",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Код и Интерфейс: Мастерская приложений на Python",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/289040",
+    "description": "GUI Pro: От идеи к приложению на Python и PySide6. Освойте создание профессиональных кроссплатформенных настольных приложений с помощью Python и PySide6 — официальной привязки к мощному фреймворку Qt. На курсе вы научитесь проектировать и реализовывать интерактивные графические интерфейсы, используя как код, так и визуальный редактор Qt Designer.  К концу курса вы сможете превратить любую идею в полноценное, отзывчивое и визуально привлекательное настольное приложение, написанное в «питоническом» стиле.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Обработка текста с помощью регулярных выражений",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288979",
+    "description": "Курс посвящен изучению регулярных выражений и их применению для обработки текста в Python. Участники могут познакомиться с базовыми конструкциями регулярных выражений: специальными символами, классами символов, квантификаторами, группировкой и альтернативами, а затем они научиться использовать модуль re в Python для поиска, извлечения и замены текстовых фрагментов.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Java для начинающих: с нуля до массивов",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "java"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288948",
+    "description": "Бесплатный курс для абсолютных новичков. Освоим переменные, операторы, условия, циклы и массивы. Автоматическая проверка задач. Заложи прочный фундамент в Java.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Pandas для собеседований: 50 задач уровня junior+/middle",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 390.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288947",
+    "description": "Практический тренажёр по Pandas для подготовки к Junior Data Analyst / Data Scientist собеседованиям. Внутри - 50 задач с реальных interview scenarios: фильтрация, groupby, merge, datetime, продуктовые mini-cases и работа с данными в стиле аналитических команд.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Быстроходная Java: Настройка и мониторинг JVM и приложений",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 18000.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "java"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288873",
+    "description": "Оптимизируйте производительность своих Java-приложений, в т.ч. путем тюнинга JVM . Вы научитесь настраивать сборщики мусора, \"подкручивать\" JIT-компиляцию, правильно выполнять бенчмаркинг, выявлять и устранять утечки памяти, вести профилирование  и многое-многое другое. Курс рассчитан на опытных разработчиков. Промокод HIPERF10K дает скидку 6000 руб до 23:59 MSK 30 июня 2026.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Python для автоматизации рабочих процессов",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288838",
+    "description": "Этот курс предназначен для людей, которые хотят автоматизировать работу с электронными документами. Он научит Вас писать небольшие программы на языке Python для упрощения Ваших рутинных задач.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "SEO: для профессионалов",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "marketing"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288822",
+    "description": "Курс для опытных SEO-специалистов: Enterprise SEO, миграции сайтов, Digital PR, алгоритмические апдейты, локальное SEO, управление командой и будущее поиска (GEO/AEO).",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Совершенствование фонетических навыков. 5 класс. Английский язык",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288802",
+    "description": "О чём курс: Ты научишься рассказывать о своём обычном дне — когда встаёшь, что делаешь утром, днём и вечером. Мы потренируемся правильно произносить английские звуки, читать транскрипцию и говорить с правильной интонацией.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Искусственный интеллект для учебы и работы",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "artificial intelligence"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288761",
+    "description": "Практический курс для начинающих, который поможет разобраться в современных нейросетях и научиться использовать AI-инструменты в учебе, работе и повседневной жизни без программирования.\n\nВо время обучения участники научатся правильно формулировать запросы, создавать тексты и изображения с помощью нейросетей, а также применять AI для решения реальных задач.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Разработка архитектуры AI-систем для бизнеса",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 1890.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "artificial intelligence"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288745",
+    "description": "Проектирование production AI-систем: от простого GPT wrapper до зрелой архитектуры с routing, context engineering и оркестрацией. Каждый урок строится вокруг реального production-инцидента и его архитектурного решения. Шесть модулей: разборы сбоев, ключевые паттерны проектирования, sync/async-обработка, оркестрация задач, очереди и workflow, event-driven подход.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "C# продвинутый: глубокий курс по .NET для сеньоров",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 7600.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "advanced"
+    ],
+    "competencies": [
+      "c#"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288694",
+    "description": "Глубокий курс по C# и .NET для разработчиков, которые уже пишут на сях. Внутренности CLR, память и Span, асинхронность и многопоточность, source generators, профилирование, Clean/DDD/CQRS, микросервисы, безопасность, EF Core и production-практики. Без хеллоу-ворлдов — только продвинутый материал.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Универсальный AI-инструментарий: работаем с любыми текстовыми ИИ",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 2000.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "artificial intelligence"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288638",
+    "description": "Освойте универсальную методологию работы с ChatGPT, Gemini, Claude, GigaChat, Grok и другими текстовыми нейросетями. Перестаньте зависеть от устаревающих промптов и научитесь управлять AI как настоящим сотрудником — ставить задачи, итеративно дорабатывать результаты и встраивать нейросети в свои рабочие процессы.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Изучение Python  с нуля",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288622",
+    "description": "Базовый курс по языку программирования Python для начинающих. Вы узнаете, как установить Python, написать первую программу, освоите переменные, типы данных, условные операторы, циклы и функции. Курс содержит текстовые материалы, иллюстрации, примеры кода и задания для самоконтроля.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Ai ",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "artificial intelligence"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288618",
+    "description": "AI-обучение Sprint — интенсив, где за один спринт ты освоишь нейросети: 4 площадки, мощная работа с промптами и создание своих AI-ассистентов. Выбери свой инструмент и вперёд! 🚀",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Основы pandas для анализа данных",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288589",
+    "description": "Короткий практический онлайн-курс для новичков, которые знают базовый Python и хотят научиться загружать, очищать, анализировать и визуализировать табличные данные с помощью pandas.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Бизнес и системный анализ: с нуля до первых артефактов",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "databases"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288542",
+    "description": "Освойте профессии бизнес-аналитика (BA) и системного аналитика (SA) для ИТ-проектов с нуля. Сбор и документирование требований, User Stories, Acceptance Criteria, BPMN-моделирование, SQL-запросы, проектирование REST API, написание тест-кейсов и подготовка к собеседованию. За 4 недели вы создадите портфолио из 5 артефактов и выполните сквозной кейс «Интернет-магазин мерча», который можно показать работодателю.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Основы Python для QA автоматизатора",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288509",
+    "description": "Мечтаете писать автотесты, но Python кажется сложным? Этот курс проведёт вас от установки интерпретатора до классов и assert: разберём переменные, списки, словари, циклы, функции, а затем инкапсуляцию, наследование и полиморфизм. Закрепите теорию на практических задачах и сможете уверенно применять Python в QA-автоматизации — без воды, сразу по делу.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Дизайн-мышление в управлении качеством",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "testing"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288452",
+    "description": "Курс направлен на формирование компетенций в области дизайн-мышления применительно к управлению качеством. Структура включает четыре модуля, последовательно реализующих этапы методологии: эмпатия (глубинные интервью, карта эмпатии, техника «5 почему»), фокусировка (карта стейкхолдеров, формирование проектной задачи POV), генерация идей (SCAMPER, «шесть шляп мышления», синектика, метод Уолта Диснея), прототипирование и тестирование. По каждому модулю предусмотрены практические упражнения. ",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Python deque: очереди, стеки и буферы",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 599.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288416",
+    "description": "Курс про collections.deque в Python: двустороннюю очередь для быстрых операций с левым и правым краем. Разберём создание deque, FIFO-очереди, LIFO-стек, append, appendleft, pop, popleft, extendleft, maxlen, rotate, отличия от list, частые ошибки и практические задачи на очереди, буферы и алгоритмы.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Запусти AI-продукт за 30 дней",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "artificial intelligence"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288362",
+    "description": "Практический курс для тех, кто хочет за 30 дней выбрать идею AI-продукта, собрать лендинг или MVP, запустить первые касания и проверить спрос через заявки, созвоны или первые оплаты.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Добрая теория вероятностей (для ЕГЭ)",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "mathematics"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288349",
+    "description": "Цель курса — дать твёрдую базу по теории вероятностей для уверенного решения экзаменационных задач. Акцент делается не на заучивании формул, а на понимании сути явлений и логики расчётов. Он построен так, чтобы вы не просто выучили алгоритмы, а действительно разобрались в теории вероятностей — отсюда и название «Добрая теория вероятностей».",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Python для начинающих.",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "professional",
+    "url": "https://stepik.org/course/288336",
+    "description": "Практический курс Python для начинающих: 10 модулей с теорией и автоматическими задачами. Изучите переменные, циклы, списки, словари, функции, файлы, обработку ошибок. Финальный проект — консольный To-Do лист с сохранением данных. Подходит для полного нуля. Каждый урок сопровождается задачей для закрепления. Итоговый тест и сертификат.»",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Java для Python-разработчика",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288278",
+    "description": "Курс знакомит опытных Python-разработчиков с языком Java через прямые сопоставления двух языков. Вы освоите статическую типизацию, классы и интерфейсы, сборку проектов и стандартную библиотеку JVM. По окончании сможете уверенно читать и писать промышленный код на современной Java (17+).",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Региональный фестиваль технического творчества \"Первый шаг\" 2026",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288259",
+    "description": "Задания по программированию на языке программирования Python для Регионального фестиваля технического творчества \"Первый шаг\"",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Python реальная практика, все что нужно в 2026 + Про Вайбкодинг",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 8567.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "advanced"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288218",
+    "description": "Современный Python от синтаксиса до продакшена: FastAPI, async, тесты, базы.\nПолный AI-блок: LLM, RAG, агенты, MCP. \nОтдельный модуль про вайбкодинг — работа с Cursor, Claude Code и Copilot. Плюс продвинутые треки: распределённые системы, data engineering и MLOps.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Data Storytelling на Python",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288205",
+    "description": "Курс посвящен применению Python для текстового и статистического анализа художественных произведений, их сюжета и лора. Вы научитесь извлекать данные из текстов и превращать их в увлекательные аналитические истории.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Как работает AI: курс для всех",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "artificial intelligence"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288197",
+    "description": "Вводный курс для тех, кто хочет спокойно и без технического перегруза разобраться, как работают современные AI-инструменты и как использовать их в обычной жизни, учёбе, работе и творческих задачах.\n\nКурс объясняет AI простым языком: от истории развития нейросетей и появления ChatGPT до базовых принципов работы больших языковых моделей. Участники узнают, что такое LLM, токены, контекстное окно, температура, промпты, системные инструкции и тп.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Искусственный интеллект. Начало",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 1749.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "artificial intelligence"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288195",
+    "description": "Освойте ИИ с нуля и научитесь использовать ChatGPT для работы, бизнеса и повседневных задач. В программе — основы искусственного интеллекта, эффективная работа с нейросетями, создание сильных промптов и практические сценарии применения. Минимум теории, максимум практики, реальных кейсов и навыков, которые можно применять сразу после обучения.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Travel English",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288103",
+    "description": "Этот курс создан для тех, кто планирует зарубежные поездки — от туристов и деловых путешественников до цифровых кочевников и сотрудников гостиничного/авиационного бизнеса. Вы освоите практическую лексику и фразы для реальных ситуаций: бронирование жилья, регистрация в аэропорту, аренда авто, жалобы в отеле, действия при краже или проблемах со здоровьем. 4 модуля с теорией, интерактивными заданиями и итоговым тестом. После курса вы будете уверенно общаться на английском в любой точке мира.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Food & Health",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "en",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/288086",
+    "description": "Курс «Food & Health English» поможет вам уверенно говорить на английском языке в ситуациях, связанных с едой, питанием, кухней и здоровьем. Вы изучите более 200 слов и выражений, освоите грамматические конструкции для советов, описания симптомов и последствий (First Conditional), а также научитесь читать этикетки, заказывать еду в ресторане, объяснять симптомы врачу и писать простые рецепты. Курс построен на реальных жизненных ситуациях и содержит теорию с таблицами, практические задания и тесты для самопро",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Как выучить английский язык?",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287997",
+    "description": "Бесплатный курс о том, как подойти к английскому с умом: понять свой уровень, поставить цель, выбрать метод, распределить время и не бросить через месяц. Без сложных терминов, чудо-обещаний и воды — только понятная система обучения.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Управление языковой школой – курс для руководителей",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 15000.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "business analytics"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287989",
+    "description": "Практический курс для владельцев и руководителей языковых школ. 68 уроков, 9 модулей — от запуска до масштабирования. Финансы, найм, удержание учеников, CRM, маркетинг и аналитика. Только конкретные инструменты: шаблоны, формулы, скрипты, метрики. Без воды.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Практикум по Python: от простых задач к алгоритмам",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287941",
+    "description": "О курсе\n\nКурс предназначен для школьников и начинающих программистов, которые хотят изучить язык программирования Python через решение практических задач.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Статистика и анализ данных в футболе с Python",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 500.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287896",
+    "description": "Анализируем футбол через математику и Python: распределение Пуассона, xG-модели, сети передач, диаграммы Вороного. Реальные данные АПЛ — бесплатно.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "English Cours ",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287839",
+    "description": "Это увлекательный курс, направленный на развитие базовых языковых навыков учащихся 4 класса. Программа разработана с учетом возрастных особенностей детей и включает интерактивные задания, игровые элементы и практические упражнения. ",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Подготовка к Golang собеседованию | Полный курс ",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "go"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287803",
+    "description": "Практический курс для Go-разработчиков уровня Junior/Middle. Готовит к техническому интервью с нуля до оффера. Внутри: 350+ вопросов с разборами, 100+ задач на написание кода, 20 задач на Code Review и 75 тестовых заданий для самопроверки с объяснением. Покрывает все ключевые темы: основы языка, конкурентность и синхронизация, базы данных, инфраструктура, алгоритмы, архитектура и протоколы. Отдельные блоки по Soft Skills и зарплатным вилкам.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "English for designers for Figma",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "design"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287801",
+    "description": "Figma English for Designers — это практический курс английского языка для начинающих UI/UX и product-дизайнеров, работающих в Figma.Курс помогает научиться уверенно общаться и работать в международной дизайн-среде: отвечать на feedback, объяснять интерфейсы и взаимодействовать с разработчиками и клиентами на английском языке.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Boss Fight: Golang собеседование",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "web development"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287777",
+    "description": "Курс по подготовке к Golang собеседованиям: 30 уровней, Go-задачи, алгоритмы, SQL, System Design и реальные вопросы с интервью backend-разработчиков. От базового Go до senior-level production engineering.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Шпаргалка Solution Architect: System Design интервью для Senior",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 2500.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "databases"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287773",
+    "description": "Готовишься к собеседованию на архитектора и боишься System Design? 72 разбора реальных кейсов — CAP, Saga, Kafka, Postgres, mTLS — в формате шпаргалки, которую открываешь перед собесом",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Английский язык. 2 класс. Academy Stars 1: тесты и тренажеры",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287750",
+    "description": "Добро пожаловать в базу тестов и тренажеров! Данный продукт создан на основе популярного учебно-методического комплекса Academy Stars 1 издательства Macmillan и включает все необходимые материалы для проверки знаний освоения данного курса и отработки навыков.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Искусственный интеллект: от теории к практике (10-11 клаcc) Demo",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "python"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287741",
+    "description": "Задачи курса:\n\n1. Ознакомить с основными понятиями, историей и современными направлениями развития ИИ.\n\n2. Сформировать компетенции в области программирования на Python для задач анализа данных.\n\n3. Обучить основным методам обработки и визуализации данных.\n\n4. Изучить базовые алгоритмы машинного обучения и нейронных сетей.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "UI/UX дизайн: от исследования к интерактивному прототипу",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "design"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287715",
+    "description": "Курс для новичков, который за 4 модуля научит создавать интерфейсы мобильных приложений в российском редакторе Pixso. Вы пройдёте путь от идеи и схем экранов до цветного макета, кликабельного прототипа и простого юзабилити-теста. В финале — проект для портфолио.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Цифровая трансформация и информационная безопасность",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 990.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "cybersecurity"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287702",
+    "description": "Перестаньте «тушить пожары» и начните управлять изменениями. \nЭтот курс — практический навигатор в мире цифровой трансформации и информационной безопасности. Вы разберетесь, чем автоматизация отличается от трансформации, узнаете что значат новомодные слова \"блокчейн\", \"ИИ\", \"биг дата\". Также научитесь выстраивать бизнес-процессы, писать грамотное ТЗ и контролировать IT-проекты без погружения в код. Узнаете, как управлять неизбежным сопротивлением сотрудников и защитить организацию от цифровых рисков. ",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "American English Through Cringe",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "en",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "english"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287661",
+    "description": "American English through cringe memes awkwardness Zoom calls irony and real social behavior. This course helps you understand how native speakers actually communicate in everyday life and online why they say things that don’t always match literal meaning how humor sarcasm and emotion shape conversations and how modern internet culture changes the way English is used in real situations.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Знакомство с онлайн-школой Data Science Руслана Сенаторова",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 0.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "data science"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287655",
+    "description": "Ознакомительный курс о SenatorovAI: рассказываем, как устроена наша онлайн-школа Data Science, чему мы обучаем, какие направления развиваем и как помогаем студентам входить в сферу данных и AI.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  },
+  {
+    "id": "stepik_0",
+    "title": "Qt для студентов и начинающих за 3 часа",
+    "provider": "Stepik",
+    "provider_type": "mooc",
+    "price": 2890.0,
+    "duration_weeks": null,
+    "format": "online",
+    "language": "ru",
+    "level": [
+      "beginner"
+    ],
+    "competencies": [
+      "c++"
+    ],
+    "certification": "none",
+    "url": "https://stepik.org/course/287610",
+    "description": "За 3 часа вы с нуля разберётесь в Qt — от работы с сигналами и слотами до готового приложения с базой данных. Курс создан специально для студентов, но подойдёт любому новичку, кто хочет быстро войти в тему.",
+    "source_quality": 1.0,
+    "embedding_vector": null,
+    "fuzzy_activation": 0.0,
+    "semantic_score": 0.0,
+    "final_score": 0.0
+  }
+]

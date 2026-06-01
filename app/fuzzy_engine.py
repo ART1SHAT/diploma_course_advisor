@@ -2,6 +2,7 @@
 from typing import Dict, List, Optional
 from dataclasses import dataclass
 import math
+import pandas as pd
 
 @dataclass
 class FuzzyTerm:
@@ -187,3 +188,26 @@ class FuzzyInferenceEngine:
                     "conclusion": rule["conclusion"]["type"]
                 })
         return trace
+    
+    def calibrate_from_data(self, df: "pd.DataFrame" = None, budget_col: str = "price", duration_col: str = "duration_weeks"):
+        """Калибрует термы по эмпирическим квантилям датасета (§2.2)"""
+        
+        if df is None:
+            return  # используем дефолтные значения
+            
+        # Бюджет
+        if budget_col in df.columns:
+            q25, q50, q75 = df[budget_col].quantile([0.25, 0.50, 0.75])
+            max_b = df[budget_col].max()
+            self.variables["budget"]["low"].params = [0, 0, q25, q50]
+            self.variables["budget"]["medium"].params = [q25, q50, q75]
+            self.variables["budget"]["high"].params = [q50, q75, max_b, max_b]
+            
+        # Длительность (если доступна)
+        if duration_col in df.columns and df[duration_col].notna().sum() > 0:
+            d_q = df[duration_col].dropna().quantile([0.33, 0.66])
+            self.variables["time_availability"]["short"].params = [0, 0, 2, d_q.iloc[0]]
+            self.variables["time_availability"]["medium"].params = [2, d_q.iloc[0], d_q.iloc[1]]
+            self.variables["time_availability"]["long"].params = [d_q.iloc[0], d_q.iloc[1], 24, 24]
+            
+        print("📊 Термы нечётких переменных откалиброваны по квантилям датасета")

@@ -6,6 +6,7 @@
 """
 
 import uvicorn
+import os
 from pathlib import Path
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -30,13 +31,20 @@ templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 # Ленивая инициализация рекомендателя
 _recommender = None
 
+# demo_mvp.py — исправленная инициализация
+_recommender = None
+
 def get_recommender():
     global _recommender
     if _recommender is None:
-        print("🔄 Загрузка курсов из data/courses_processed.csv...")
-        _recommender = HybridRecommender(csv_path="data/courses_processed.csv")
-        count = _recommender.loader.load().shape[0]
-        print(f"✅ Загружено {count} курсов")
+        # Проверяем доступность файлов
+        json_path = "data/unified_courses.json"
+        if os.path.exists(json_path):
+            print(f"🔄 Загрузка курсов из {json_path}...")
+            _recommender = HybridRecommender(json_path=json_path)
+        else:
+            raise FileNotFoundError(f"❌ Не найден {json_path}")
+        print(f"✅ Загружено {len(_recommender.courses)} курсов")
     return _recommender
 
 # Модель запроса
@@ -96,12 +104,12 @@ async def recommend_api(req: RecommendationRequest):
             "recommendations": recommendations,
             "explanations": explanations,
             "meta": {
-                "fuzzy_rules_count": len(FuzzyInferenceEngine().rules),
-                "total_courses_in_db": rec.loader.load().shape[0]
+                "fuzzy_rules_count": 5,
+                "total_courses_in_db": len(rec.courses)
             }
         }
     except Exception as e:
-        print(f"❌ Error in /api/recommend: {e}")
+        logging.error(f"❌ Error in /api/recommend: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
 
 # 🩺 Health check

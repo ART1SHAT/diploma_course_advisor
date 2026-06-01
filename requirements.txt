@@ -9,3 +9,4 @@ beautifulsoup4
 sqlalchemy
 jinja2
 python-multipart
+numpy>=1.24.0
