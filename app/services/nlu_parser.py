@@ -1,249 +1,217 @@
 """
-NLU-парсер: regex + лёгкие эмбеддинги (bag-of-words) для свободного текста.
+NLU-парсер (§2.4): regex-паттерны для извлечения сущностей из свободного текста.
 """
 from __future__ import annotations
 
-import logging
-import math
 import re
 from typing import Any, Dict, List, Optional, Tuple
 
-logger = logging.getLogger(__name__)
-
-# ——— Regex-паттерны ———
-RE_BUDGET = re.compile(
-    r"(?:бюджет|до|не\s+более|макс(?:имум)?)\s*"
-    r"(\d[\d\s]{2,8})\s*(?:₽|руб(?:\.|лей)?|р\.?)?",
+# ——— Паттерны ———
+RE_BUDGET_UNTIL = re.compile(
+    r"(?:до|не\s+более|макс(?:имум)?)\s*(\d[\d\s]{2,8})\s*(?:₽|руб|тыс|тысяч)?",
+    re.IGNORECASE,
+)
+RE_BUDGET_RANGE = re.compile(
+    r"бюджет\s*(\d{1,3})\s*[-–]\s*(\d{1,3})\s*(?:тыс|тысяч)",
     re.IGNORECASE,
 )
 RE_BUDGET_PLAIN = re.compile(
-    r"(\d[\d\s]{4,9})\s*(?:₽|руб(?:\.|лей)?|р\.?)",
+    r"(\d[\d\s]{4,9})\s*(?:₽|руб(?:\.|лей)?|р\.?|тыс(?:яч)?)?",
     re.IGNORECASE,
 )
 RE_TIME = re.compile(
     r"(\d{1,2})\s*(?:ч(?:ас(?:ов)?)?|h)\s*(?:в\s*неделю|/нед|неделю)?",
     re.IGNORECASE,
 )
-RE_KNOWLEDGE_LEVEL = re.compile(
-    r"(?:уровень|оценка|знания?)\s*[:=]?\s*(\d{1,2})(?:\s*/\s*10)?",
-    re.IGNORECASE,
-)
-RE_KNOWLEDGE_WORDS = re.compile(
-    r"\b(новичок|начинающ|средн|продвинут|эксперт|advanced|beginner)\b",
+RE_KNOWLEDGE_NUM = re.compile(
+    r"(?:уровень|оценка|знания?)\s*[:=]?\s*(\d{1,2})",
     re.IGNORECASE,
 )
 
-# ——— Эмбеддинги термов (bag-of-words, офлайн) ———
-TERM_VECTORS: Dict[str, Dict[str, float]] = {
-    "career_employment": {
-        "работ": 1.0,
-        "карьер": 1.0,
-        "трудоустрой": 1.0,
-        "it": 0.8,
-        "професс": 0.9,
-        "разработ": 0.7,
-        "зарплат": 0.6,
-    },
-    "career_academic": {
-        "егэ": 1.0,
-        "университет": 1.0,
-        "академ": 1.0,
-        "экзамен": 0.9,
-        "вуз": 0.9,
-        "диплом": 0.7,
-    },
-    "career_personal": {
-        "хобби": 1.0,
-        "для себя": 1.0,
-        "интерес": 0.8,
-        "удовольств": 0.7,
-        "саморазвит": 0.9,
-    },
-    "knowledge_beginner": {"новичок": 1.0, "начинающ": 1.0, "zero": 0.8, "с нуля": 1.0},
-    "knowledge_intermediate": {"средн": 1.0, "базов": 0.8, "intermediate": 1.0},
-    "knowledge_advanced": {"продвинут": 1.0, "эксперт": 1.0, "advanced": 1.0},
-    "time_short": {"мало": 0.8, "редко": 0.7, "1-2": 0.6, "занят": 0.5},
-    "time_long": {"много": 0.9, "полный": 0.7, "интенсив": 0.6, "каждый день": 0.8},
-}
-
-CAREER_TERM_MAP = {
-    "career_employment": ("career_focus", "employment", 1.0),
-    "career_academic": ("career_focus", "academic", 0.5),
-    "career_personal": ("career_focus", "personal", 0.0),
-}
-
-KNOWLEDGE_TERM_MAP = {
-    "knowledge_beginner": ("knowledge_level", 2.0),
-    "knowledge_intermediate": ("knowledge_level", 5.0),
-    "knowledge_advanced": ("knowledge_level", 8.0),
-}
+RE_ASK_RECOMMEND = re.compile(
+    r"\b(рекоменд|подбер|найди|покажи|что выбрать|дай курс)\b",
+    re.IGNORECASE,
+)
 
 
-def _tokenize(text: str) -> List[str]:
-    return re.findall(r"[а-яёa-z0-9]+", text.lower())
+def _budget_term_and_value(amount_rub: float) -> Tuple[str, float]:
+    if amount_rub <= 0:
+        return "low", 0.0
+    if amount_rub < 30_000:
+        return "low", amount_rub
+    if amount_rub < 100_000:
+        return "medium", amount_rub
+    return "high", amount_rub
 
 
-def _bow_vector(tokens: List[str]) -> Dict[str, float]:
-    vec: Dict[str, float] = {}
-    for t in tokens:
-        vec[t] = vec.get(t, 0.0) + 1.0
-    norm = math.sqrt(sum(v * v for v in vec.values())) or 1.0
-    return {k: v / norm for k, v in vec.items()}
+def _parse_budget(text: str) -> Optional[Dict[str, Any]]:
+    t = text.lower()
+    if re.search(r"\b(недорог\w*|дешёв\w*|дешев\w*|эконом\w*)\b", t):
+        return {"term": "low", "value": 15_000.0, "confidence": 0.75}
+    if re.search(r"\b(дорог|премиум|неограничен)\b", t):
+        return {"term": "high", "value": 150_000.0, "confidence": 0.75}
 
+    m_range = RE_BUDGET_RANGE.search(text)
+    if m_range:
+        lo, hi = float(m_range.group(1)) * 1000, float(m_range.group(2)) * 1000
+        mid = (lo + hi) / 2
+        term, val = _budget_term_and_value(mid)
+        return {"term": term, "value": val, "confidence": 0.85}
 
-def _cosine(a: Dict[str, float], b: Dict[str, float]) -> float:
-    if not a or not b:
-        return 0.0
-    dot = sum(a.get(k, 0) * b.get(k, 0) for k in set(a) | set(b))
-    return max(0.0, min(1.0, dot))
-
-
-def _embed_match(text: str, label: str) -> float:
-    tokens = _tokenize(text)
-    if not tokens:
-        return 0.0
-    doc_vec = _bow_vector(tokens)
-    proto = TERM_VECTORS.get(label, {})
-    proto_vec = _bow_vector(list(proto.keys()))
-    # Веса прототипа
-    weighted = {k: proto.get(k, 0.5) for k in proto}
-    weighted_vec = _bow_vector(list(weighted.keys()))
-    for k, w in weighted.items():
-        if k in weighted_vec:
-            weighted_vec[k] *= w
-    return _cosine(doc_vec, weighted_vec)
-
-
-def _parse_budget(text: str) -> Optional[Tuple[float, float]]:
-    for pattern in (RE_BUDGET, RE_BUDGET_PLAIN):
+    for pattern in (RE_BUDGET_UNTIL, RE_BUDGET_PLAIN):
         m = pattern.search(text)
         if m:
             raw = m.group(1).replace(" ", "")
             try:
                 val = float(raw)
-                if val > 0:
-                    conf = 0.9 if "бюджет" in text.lower() or "₽" in text or "руб" in text.lower() else 0.75
-                    return val, conf
+                if "тыс" in t and val < 1000:
+                    val *= 1000
+                term, norm = _budget_term_and_value(val)
+                conf = 1.0 if "бюджет" in t or "₽" in text else 0.85
+                return {"term": term, "value": norm, "confidence": conf}
             except ValueError:
                 continue
-    if re.search(r"\bбесплатн", text, re.I):
-        return 0.0, 0.85
     return None
 
 
-def _parse_time(text: str) -> Optional[Tuple[float, float]]:
+def _parse_career(text: str) -> Optional[Dict[str, Any]]:
+    t = text.lower()
+    if re.search(r"\b(трудоустройств|для работы|работ[ауеы]|карьер|в\s+it)\b", t):
+        return {"term": "employment", "value": 1.0, "confidence": 0.9}
+    if re.search(r"\b(академ|егэ|университет|вуз|учёб)\b", t):
+        return {"term": "academic", "value": 0.5, "confidence": 0.85}
+    if re.search(r"\b(для себя|хобби|личн|саморазвит)\b", t):
+        return {"term": "personal", "value": 0.0, "confidence": 0.85}
+    if re.search(r"\bхочу\b", t) and re.search(r"\bработ", t):
+        return {"term": "employment", "value": 1.0, "confidence": 0.8}
+    return None
+
+
+def _parse_time(text: str) -> Optional[Dict[str, Any]]:
     m = RE_TIME.search(text)
     if m:
-        return float(m.group(1)), 0.85
-    score_long = _embed_match(text, "time_long")
-    score_short = _embed_match(text, "time_short")
-    if score_long > 0.45 and score_long > score_short:
-        return 12.0, score_long
-    if score_short > 0.45:
-        return 3.0, score_short
-    return None
-
-
-def _parse_knowledge(text: str) -> Optional[Tuple[float, float]]:
-    m = RE_KNOWLEDGE_LEVEL.search(text)
-    if m:
-        val = float(m.group(1))
-        return min(10.0, max(0.0, val)), 0.9
-    m2 = RE_KNOWLEDGE_WORDS.search(text)
-    if m2:
-        word = m2.group(1).lower()
-        if any(x in word for x in ("нович", "начина", "beginner")):
-            return 2.0, 0.8
-        if any(x in word for x in ("продвин", "эксперт", "advanced")):
-            return 8.0, 0.8
-        return 5.0, 0.75
-    best_val, best_conf = None, 0.0
-    for label, (_, num) in KNOWLEDGE_TERM_MAP.items():
-        sc = _embed_match(text, label)
-        if sc > best_conf:
-            best_conf = sc
-            best_val = num
-    if best_val is not None and best_conf > 0.4:
-        return best_val, best_conf
-    return None
-
-
-def _parse_career(text: str) -> Optional[Tuple[str, float, float]]:
-    best: Optional[Tuple[str, float, float]] = None
-    best_score = 0.0
-    for label, (slot, term, numeric) in CAREER_TERM_MAP.items():
-        sc = _embed_match(text, label)
-        if sc > best_score:
-            best_score = sc
-            best = (term, numeric, sc)
-    if best and best_score > 0.35:
-        return best
-    if re.search(r"\b(работ|карьер|it|трудоустрой)", text, re.I):
-        return "employment", 1.0, 0.7
-    if re.search(r"\b(егэ|университет|вуз)", text, re.I):
-        return "academic", 0.5, 0.7
-    if re.search(r"\b(хобби|для себя)", text, re.I):
-        return "personal", 0.0, 0.7
-    return None
-
-
-def detect_intent(text: str) -> str:
+        hours = float(m.group(1))
+        if hours <= 4:
+            return {"term": "short", "value": hours, "confidence": 0.9}
+        if hours <= 10:
+            return {"term": "medium", "value": hours, "confidence": 0.9}
+        return {"term": "long", "value": hours, "confidence": 0.9}
     t = text.lower()
-    if re.search(r"\b(рекоменд|подбер|найди|покажи курс|что выбрать)\b", t):
-        return "request_recommendation"
-    if re.search(r"\b(бюджет|руб|₽|уровень|часов|цель|хочу учить)\b", t):
-        return "provide_profile"
-    return "provide_profile" if len(t.strip()) > 3 else "unknown"
+    if re.search(r"\b(мало времени|занят|редко)\b", t):
+        return {"term": "short", "value": 3.0, "confidence": 0.7}
+    if re.search(r"\b(много времени|интенсив|каждый день|готов учиться много)\b", t):
+        return {"term": "long", "value": 15.0, "confidence": 0.75}
+    return None
+
+
+def _parse_knowledge(text: str) -> Optional[Dict[str, Any]]:
+    m = RE_KNOWLEDGE_NUM.search(text)
+    if m:
+        val = min(10.0, max(0.0, float(m.group(1))))
+        if val <= 3:
+            term = "beginner"
+        elif val <= 6:
+            term = "intermediate"
+        else:
+            term = "advanced"
+        return {"term": term, "value": val, "confidence": 0.95}
+    t = text.lower()
+    if re.search(r"\b(новичок|начинающ|с нуля|zero)\b", t):
+        return {"term": "beginner", "value": 2.0, "confidence": 0.85}
+    if re.search(r"\b(продвинут|эксперт|advanced)\b", t):
+        return {"term": "advanced", "value": 8.0, "confidence": 0.85}
+    if re.search(r"\b(уже знаю|средн|базов)\b", t):
+        return {"term": "intermediate", "value": 5.0, "confidence": 0.8}
+    return None
+
+
+def _detect_intent(text: str, entities: Dict[str, Any]) -> str:
+    t = text.lower()
+    if RE_ASK_RECOMMEND.search(t):
+        return "ask_recommend"
+    if entities.get("budget") or re.search(r"\b(бюджет|руб|₽|тысяч|недорог)\b", t):
+        return "set_budget"
+    if entities.get("career_focus") or re.search(r"\b(хочу|цель|работ)\b", t):
+        return "set_goal"
+    if entities.get("time_availability") or re.search(r"\b(час|неделю|время)\b", t):
+        return "set_time"
+    if entities.get("knowledge_level") or re.search(r"\b(новичок|уровень|знан)\b", t):
+        return "set_knowledge"
+    return "unknown" if len(t.strip()) < 4 else "set_goal"
+
+
+def parse_user_message(text: str) -> Dict[str, Any]:
+    """
+    Парсинг пользовательского сообщения.
+    Возвращает intent, entities {slot: {term, value, confidence}}, raw_text.
+    """
+    raw = (text or "").strip()
+    if not raw:
+        return {"intent": "unknown", "entities": {}, "raw_text": ""}
+
+    entities: Dict[str, Dict[str, Any]] = {}
+
+    budget = _parse_budget(raw)
+    if budget:
+        entities["budget"] = budget
+
+    career = _parse_career(raw)
+    if career:
+        entities["career_focus"] = career
+
+    time_ent = _parse_time(raw)
+    if time_ent:
+        entities["time_availability"] = time_ent
+
+    knowledge = _parse_knowledge(raw)
+    if knowledge:
+        entities["knowledge_level"] = knowledge
+
+    # Цель — только если нет других сущностей или явная формулировка цели
+    if (
+        len(raw) > 25
+        and "goals" not in entities
+        and len(entities) <= 1
+        and re.search(r"\b(цель|хочу учить|обучени)\b", raw.lower())
+    ):
+        entities["goals"] = {"term": raw, "value": 0.0, "confidence": 0.6}
+
+    intent = _detect_intent(raw, entities)
+    return {"intent": intent, "entities": entities, "raw_text": raw}
 
 
 class NLUParser:
-    """Парсер свободного текста → intent + entities + confidence."""
+    """Обёртка для обратной совместимости с прежним API parse()."""
 
     def parse(self, text: str) -> Dict[str, Any]:
-        text = (text or "").strip()
-        if not text:
-            return {"intent": "unknown", "entities": {}, "confidence": 0.0}
-
-        intent = detect_intent(text)
-        entities: Dict[str, Dict[str, Any]] = {}
-        confidences: List[float] = []
-
-        budget = _parse_budget(text)
-        if budget:
-            val, conf = budget
-            entities["budget"] = {"value": val, "confidence": conf}
-            confidences.append(conf)
-
-        knowledge = _parse_knowledge(text)
-        if knowledge:
-            val, conf = knowledge
-            entities["knowledge_level"] = {"value": val, "confidence": conf}
-            confidences.append(conf)
-
-        time_val = _parse_time(text)
-        if time_val:
-            val, conf = time_val
-            entities["time_availability"] = {"value": val, "confidence": conf}
-            confidences.append(conf)
-
-        career = _parse_career(text)
-        if career:
-            term, numeric, conf = career
-            entities["career_focus"] = {"value": term, "confidence": conf, "numeric": numeric}
-            confidences.append(conf)
-
-        # Цель — остаток длинного текста без числовых сущностей
-        if len(text) > 25 and "goals" not in entities:
-            entities["goals"] = {"value": text, "confidence": 0.55}
-            confidences.append(0.55)
-
-        overall = sum(confidences) / len(confidences) if confidences else 0.35
+        result = parse_user_message(text)
+        legacy_entities: Dict[str, Dict[str, Any]] = {}
+        for slot, ent in result["entities"].items():
+            if slot == "goals":
+                legacy_entities["goals"] = {
+                    "value": ent.get("term", result["raw_text"]),
+                    "confidence": ent.get("confidence", 0.6),
+                }
+            else:
+                legacy_entities[slot] = {
+                    "value": ent.get("value", ent.get("term")),
+                    "confidence": ent.get("confidence", 0.7),
+                }
+        confs = [e.get("confidence", 0.5) for e in legacy_entities.values()]
+        overall = sum(confs) / len(confs) if confs else 0.35
+        intent_map = {
+            "ask_recommend": "request_recommendation",
+            "set_budget": "provide_profile",
+            "set_goal": "provide_profile",
+            "set_time": "provide_profile",
+            "set_knowledge": "provide_profile",
+            "unknown": "unknown",
+        }
         return {
-            "intent": intent,
-            "entities": entities,
+            "intent": intent_map.get(result["intent"], "provide_profile"),
+            "entities": legacy_entities,
             "confidence": round(min(1.0, overall), 3),
         }
 
 
-# Singleton
 nlu_parser = NLUParser()

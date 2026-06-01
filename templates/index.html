@@ -3,27 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CourseAdvisor — ИС выбора образовательных программ</title>
+    <title>Информационно-советующая система выбора программы обучения</title>
     <style>
         :root {
-            --primary: #4f46e5;
-            --primary-hover: #4338ca;
-            --primary-soft: #eef2ff;
-            --accent: #0ea5e9;
-            --success: #059669;
-            --success-soft: #ecfdf5;
-            --warning: #d97706;
-            --danger: #dc2626;
-            --danger-soft: #fef2f2;
-            --bg: #f1f5f9;
+            --primary: #2563eb;
+            --text: #000000;
+            --text-muted: #333333;
+            --border: #cccccc;
             --surface: #ffffff;
-            --text: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --radius: 14px;
-            --radius-sm: 8px;
-            --shadow: 0 1px 3px rgb(15 23 42 / 0.08), 0 8px 24px rgb(15 23 42 / 0.06);
-            --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --bg: #ffffff;
+            --font: Calibri, Arial, Helvetica, sans-serif;
         }
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,56 +21,32 @@
             font-family: var(--font);
             background: var(--bg);
             color: var(--text);
-            line-height: 1.55;
-            min-height: 100vh;
+            line-height: 1.5;
+            font-size: 14px;
         }
 
         .page {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: 1rem 1.25rem 2.5rem;
+            padding: 1.5rem 1.25rem 2rem;
         }
 
-        /* ——— Header ——— */
         .hero {
-            text-align: center;
-            padding: 1.5rem 1rem 1.75rem;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
         }
         .hero h1 {
-            font-size: clamp(1.5rem, 4vw, 1.85rem);
+            font-size: 1.35rem;
             font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 0.35rem;
-        }
-        .hero p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            max-width: 36rem;
-            margin: 0 auto;
-        }
-        .hero-tags {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 0.4rem;
-            margin-top: 0.75rem;
-        }
-        .pill {
-            display: inline-block;
-            font-size: 0.72rem;
-            font-weight: 500;
-            padding: 0.2rem 0.65rem;
-            border-radius: 999px;
-            background: var(--primary-soft);
-            color: var(--primary);
+            line-height: 1.35;
+            max-width: 52rem;
         }
 
-        /* ——— Layout ——— */
         .layout {
             display: grid;
-            grid-template-columns: minmax(280px, 380px) 1fr;
-            gap: 1.25rem;
+            grid-template-columns: minmax(280px, 360px) 1fr;
+            gap: 1.5rem;
             align-items: start;
         }
         @media (max-width: 900px) {
@@ -89,437 +54,207 @@
         }
 
         .panel {
-            background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
+            background: var(--surface);
         }
         .panel-head {
-            padding: 1rem 1.15rem;
+            padding: 0.75rem 1rem;
             border-bottom: 1px solid var(--border);
-            background: linear-gradient(180deg, #fafbff 0%, var(--surface) 100%);
         }
         .panel-head h2 {
-            font-size: 1.05rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 0.45rem;
+            font-size: 1rem;
+            font-weight: 700;
         }
         .panel-head p {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
             margin-top: 0.2rem;
         }
-        .panel-body { padding: 1.15rem; }
+        .panel-body { padding: 1rem; }
 
-        /* ——— Form ——— */
-        .form-group { margin-bottom: 1.1rem; }
+        .form-group { margin-bottom: 1rem; }
         .form-group label {
             display: block;
-            font-size: 0.88rem;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.35rem;
         }
         .form-group .hint {
-            font-size: 0.75rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             font-weight: 400;
-            margin-top: 0.15rem;
+            margin-top: 0.2rem;
         }
         input[type="number"],
         input[type="text"],
         select,
         textarea {
             width: 100%;
-            padding: 0.6rem 0.75rem;
+            padding: 0.45rem 0.5rem;
             border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             font-family: inherit;
             background: #fff;
-            transition: border-color 0.15s, box-shadow 0.15s;
         }
         input:focus, select:focus, textarea:focus {
-            outline: none;
+            outline: 1px solid var(--primary);
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgb(79 70 229 / 0.15);
         }
         input[type="range"] {
             width: 100%;
-            height: 6px;
             accent-color: var(--primary);
-            margin: 0.35rem 0;
         }
         .slider-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             font-size: 0.75rem;
             color: var(--text-muted);
-            gap: 0.5rem;
         }
         .slider-row .term {
             font-weight: 600;
-            color: var(--primary);
-            font-size: 0.82rem;
-            min-width: 4.5rem;
-            text-align: center;
-            padding: 0.15rem 0.5rem;
-            background: var(--primary-soft);
-            border-radius: 6px;
-        }
-        .slider-ticks {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.68rem;
-            color: #94a3b8;
-            margin-top: 0.15rem;
+            color: var(--text);
         }
 
-        .btn-row {
-            display: flex;
-            flex-direction: column;
-            gap: 0.55rem;
-            margin-top: 0.25rem;
-        }
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.4rem;
             width: 100%;
-            padding: 0.7rem 1rem;
-            border: none;
-            border-radius: var(--radius-sm);
+            padding: 0.55rem 1rem;
+            border: 1px solid var(--primary);
+            background: var(--primary);
+            color: #fff;
             font-size: 0.95rem;
             font-weight: 600;
             font-family: inherit;
             cursor: pointer;
-            transition: background 0.15s, transform 0.1s;
         }
-        .btn:active { transform: scale(0.98); }
-        .btn:disabled { opacity: 0.55; cursor: not-allowed; }
-        .btn-primary { background: var(--primary); color: #fff; }
-        .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
-        .btn-demo {
-            background: #fff;
-            color: var(--primary);
-            border: 1.5px dashed var(--primary);
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
-        .btn-demo:hover:not(:disabled) { background: var(--primary-soft); }
+        .btn:hover:not(:disabled) {
+            background: #1d4ed8;
+            border-color: #1d4ed8;
+        }
 
         .alert {
             display: none;
-            margin-top: 0.85rem;
-            padding: 0.75rem 0.85rem;
-            border-radius: var(--radius-sm);
+            margin-top: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid var(--border);
             font-size: 0.85rem;
-            line-height: 1.45;
         }
         .alert.visible { display: block; }
         .alert-error {
-            background: var(--danger-soft);
-            color: var(--danger);
-            border: 1px solid #fecaca;
+            border-color: #991b1b;
+            color: #991b1b;
         }
 
-        /* ——— Results ——— */
         .results-meta {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 0.85rem;
-            padding: 0.5rem 0.65rem;
-            background: #f8fafc;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
         }
-        .results-meta strong { color: var(--text); }
 
         .empty-state {
+            padding: 2rem 1rem;
             text-align: center;
-            padding: 2.5rem 1rem;
             color: var(--text-muted);
+            font-size: 0.9rem;
         }
-        .empty-state .icon { font-size: 2rem; margin-bottom: 0.5rem; opacity: 0.6; }
 
-        /* Loading */
         .loading-wrap { display: none; }
         .loading-wrap.active { display: block; }
-        .spinner-bar {
-            display: flex;
-            align-items: center;
-            gap: 0.65rem;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            background: var(--primary-soft);
-            border-radius: var(--radius-sm);
-            font-size: 0.88rem;
-            color: var(--primary);
-        }
-        .spinner {
-            width: 22px;
-            height: 22px;
-            border: 3px solid #c7d2fe;
-            border-top-color: var(--primary);
-            border-radius: 50%;
-            animation: spin 0.75s linear infinite;
-            flex-shrink: 0;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        .skeleton-list { display: flex; flex-direction: column; gap: 0.85rem; }
-        .skeleton-card {
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-            padding: 1rem;
-            background: #fff;
-        }
-        .sk-line {
-            height: 12px;
-            border-radius: 4px;
-            background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
-            background-size: 200% 100%;
-            animation: shimmer 1.2s infinite;
-            margin-bottom: 0.5rem;
-        }
-        .sk-line.w60 { width: 60%; }
-        .sk-line.w40 { width: 40%; }
-        .sk-line.w80 { width: 80%; }
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
+        .loading-text {
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
         }
 
-        /* Recommendation cards */
         .rec-list { display: flex; flex-direction: column; gap: 1rem; }
         .rec-card {
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            overflow: hidden;
-            background: #fff;
+            padding: 0;
         }
         .rec-card-top {
-            padding: 1rem 1.1rem;
+            padding: 0.75rem 1rem;
             border-bottom: 1px solid var(--border);
-            background: linear-gradient(135deg, var(--success-soft) 0%, #fff 55%);
-        }
-        .rec-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 0.75rem;
-            flex-wrap: wrap;
         }
         .rec-rank {
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: var(--success);
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 0.2rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
         }
         .rec-title {
-            font-size: 1.02rem;
-            font-weight: 600;
-            line-height: 1.35;
-            flex: 1;
-            min-width: 0;
-        }
-        .score-ring {
-            flex-shrink: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--success);
-            color: #fff;
+            font-size: 1rem;
             font-weight: 700;
-            font-size: 0.95rem;
-            box-shadow: 0 2px 8px rgb(5 150 105 / 0.35);
+            margin-bottom: 0.5rem;
         }
-        .score-ring span {
-            font-size: 0.58rem;
-            font-weight: 500;
-            opacity: 0.9;
+        .rec-score {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
         }
         .rec-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem 1rem;
-            margin-top: 0.65rem;
-            font-size: 0.82rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        .rec-skills {
+            font-size: 0.8rem;
+            margin-top: 0.35rem;
             color: var(--text-muted);
         }
-        .rec-meta-item {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-        .rec-meta-item strong { color: var(--text); font-weight: 600; }
-
-        .badge-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.35rem;
-            margin-top: 0.65rem;
-        }
-        .badge {
-            font-size: 0.72rem;
-            font-weight: 500;
-            padding: 0.2rem 0.5rem;
-            border-radius: 6px;
-            background: #e2e8f0;
-            color: #334155;
-        }
-        .badge-format {
-            background: #dbeafe;
-            color: #1d4ed8;
-        }
-        .badge-skill {
-            background: #f3e8ff;
-            color: #6b21a8;
+        .rec-card-body {
+            padding: 0.75rem 1rem 1rem;
         }
 
-        .rec-card-body { padding: 0.85rem 1.1rem 1rem; }
+        .explain-list {
+            list-style: disc;
+            padding-left: 1.25rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+        .explain-list li { margin-bottom: 0.25rem; }
 
-        /* Accordion — explanations */
-        .accordion { border: 1px solid var(--border); border-radius: var(--radius-sm); overflow: hidden; }
-        .accordion-item { border-bottom: 1px solid var(--border); }
-        .accordion-item:last-child { border-bottom: none; }
-        .accordion-trigger {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.65rem 0.85rem;
-            background: #fafafa;
-            border: none;
-            font-family: inherit;
-            font-size: 0.84rem;
-            text-align: left;
-            cursor: pointer;
-            color: var(--text);
-            transition: background 0.12s;
-        }
-        .accordion-trigger:hover { background: #f1f5f9; }
-        .accordion-trigger .check { color: var(--success); font-weight: 700; }
-        .accordion-trigger .chev {
-            margin-left: auto;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            transition: transform 0.2s;
-        }
-        .accordion-item.open .accordion-trigger .chev { transform: rotate(180deg); }
-        .accordion-panel {
-            display: none;
-            padding: 0.5rem 0.85rem 0.75rem;
+        .confidence-line {
             font-size: 0.8rem;
             color: var(--text-muted);
-            background: #fff;
-            border-top: 1px solid var(--border);
+            margin-bottom: 0.5rem;
         }
-        .accordion-item.open .accordion-panel { display: block; }
-        .confidence-line {
-            font-size: 0.78rem;
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-            padding-top: 0.5rem;
-            border-top: 1px dashed var(--border);
-        }
-        .confidence-line b { color: var(--primary); }
 
-        /* Rule trace table */
-        .trace-details { margin-top: 0.65rem; }
         .trace-details summary {
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             font-weight: 600;
-            color: var(--text-muted);
-            padding: 0.45rem 0.6rem;
-            background: #f8fafc;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-            list-style: none;
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
+            padding: 0.35rem 0;
         }
-        .trace-details summary::-webkit-details-marker { display: none; }
-        .trace-details summary::before { content: "▶"; font-size: 0.65rem; transition: transform 0.15s; }
-        .trace-details[open] summary::before { transform: rotate(90deg); }
-        .trace-details[open] summary { border-radius: var(--radius-sm) var(--radius-sm) 0 0; }
-        .trace-table-wrap {
-            overflow-x: auto;
-            border: 1px solid var(--border);
-            border-top: none;
-            border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-        }
-        table.trace-table {
+        .trace-table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.75rem;
+            font-size: 0.8rem;
+            margin-top: 0.35rem;
         }
         .trace-table th,
         .trace-table td {
-            padding: 0.5rem 0.6rem;
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.5rem;
             text-align: left;
-            border-bottom: 1px solid var(--border);
+            vertical-align: top;
         }
         .trace-table th {
-            background: #f1f5f9;
-            font-weight: 600;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-        .trace-table tr:last-child td { border-bottom: none; }
-        .trace-table td.mono { font-family: ui-monospace, monospace; font-size: 0.72rem; }
-        .act-bar {
-            display: inline-block;
-            min-width: 2.5rem;
-            padding: 0.1rem 0.35rem;
-            border-radius: 4px;
-            background: #dbeafe;
-            color: #1e40af;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .footnote {
-            margin-top: 1rem;
-            padding: 0.65rem 0.75rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            background: #f8fafc;
-            border-radius: var(--radius-sm);
-            border-left: 3px solid var(--accent);
-        }
-        .footnote code {
-            font-size: 0.72rem;
-            background: #e2e8f0;
-            padding: 0.1rem 0.3rem;
-            border-radius: 3px;
+            font-weight: 700;
+            background: #f5f5f5;
         }
     </style>
 </head>
 <body>
     <div class="page">
         <header class="hero">
-            <h1>CourseAdvisor</h1>
-            <p>Информационно-советующая система выбора образовательных программ на основе нечёткой логики и семантического поиска</p>
-            <div class="hero-tags">
-                <span class="pill">ВКР · MVP</span>
-                <span class="pill">Нечёткий вывод</span>
-                <span class="pill">Гибридный скоринг</span>
-            </div>
+            <h1>Разработка информационно – советующей системы для выбора программы обучения на основе лингвистической модели</h1>
         </header>
 
         <div class="layout">
-            <!-- Профиль пользователя -->
             <section class="panel">
                 <div class="panel-head">
                     <h2>Профиль пользователя</h2>
@@ -528,38 +263,28 @@
                 <div class="panel-body">
                     <form id="profileForm">
                         <div class="form-group">
-                            <label for="budget">Бюджет на обучение (₽)</label>
+                            <label for="budget">Бюджет на обучение (руб.)</label>
                             <input type="number" id="budget" value="50000" min="0" step="5000">
-                            <p class="hint">Терм: <span id="budgetTerm" class="term" style="display:inline">средний</span></p>
+                            <p class="hint">Терм: <span id="budgetTerm" class="term">средний</span></p>
                         </div>
 
                         <div class="form-group">
-                            <label for="knowledge">Уровень знаний</label>
+                            <label for="knowledge">Уровень знаний (0–10)</label>
                             <input type="range" id="knowledge" min="0" max="10" value="3" step="1">
                             <div class="slider-row">
                                 <span>0</span>
                                 <span id="knowTerm" class="term">низкий</span>
                                 <span>10</span>
                             </div>
-                            <div class="slider-ticks">
-                                <span>низкий</span>
-                                <span>средний</span>
-                                <span>высокий</span>
-                            </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="time">Время на обучение (ч/нед)</label>
+                            <label for="time">Время на обучение (часов в неделю)</label>
                             <input type="range" id="time" min="1" max="20" value="6" step="1">
                             <div class="slider-row">
                                 <span>1</span>
                                 <span id="timeTerm" class="term">низкий</span>
                                 <span>20</span>
-                            </div>
-                            <div class="slider-ticks">
-                                <span>низкий</span>
-                                <span>средний</span>
-                                <span>высокий</span>
                             </div>
                         </div>
 
@@ -567,57 +292,41 @@
                             <label for="career">Карьерная направленность</label>
                             <select id="career">
                                 <option value="1.0" selected>высокая — трудоустройство</option>
-                                <option value="0.5">средняя — подготовка / ЕГЭ</option>
-                                <option value="0.0">низкая — хобби / развитие</option>
+                                <option value="0.5">средняя — подготовка к экзаменам</option>
+                                <option value="0.0">низкая — личное развитие</option>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label for="interests">Интересы</label>
-                            <input type="text" id="interests" value="анализ данных, python, автоматизация" placeholder="через запятую">
+                            <input type="text" id="interests" value="анализ данных, python, автоматизация">
                         </div>
 
                         <div class="form-group">
-                            <label for="goals">Ключевая цель</label>
-                            <input type="text" id="goals" value="получить практические навыки для работы в IT">
+                            <label for="goals">Ключевая цель обучения</label>
+                            <input type="text" id="goals" value="получить практические навыки для работы в информационных технологиях">
                         </div>
 
-                        <div class="btn-row">
-                            <button type="submit" class="btn btn-primary" id="submitBtn">Найти программы</button>
-                            <button type="button" class="btn btn-demo" id="demoBtn">Демо-сценарий</button>
-                        </div>
+                        <button type="submit" class="btn" id="submitBtn">Найти программы</button>
                     </form>
                     <div id="errorMsg" class="alert alert-error" role="alert"></div>
                 </div>
             </section>
 
-            <!-- Рекомендации -->
             <section class="panel">
                 <div class="panel-head">
                     <h2>Рекомендации</h2>
-                    <p>Ранжированный список с объяснением и трассировкой правил</p>
+                    <p>Ранжированный список программ с объяснением решения</p>
                 </div>
-                <div class="panel-body results-area">
+                <div class="panel-body">
                     <div id="loadingWrap" class="loading-wrap">
-                        <div class="spinner-bar">
-                            <div class="spinner" aria-hidden="true"></div>
-                            <span>Анализ базы курсов: семантика + нечёткий вывод…</span>
-                        </div>
-                        <div class="skeleton-list" aria-hidden="true">
-                            <div class="skeleton-card"><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div></div>
-                            <div class="skeleton-card"><div class="sk-line w80"></div><div class="sk-line w60"></div><div class="sk-line w40"></div></div>
-                        </div>
+                        <p class="loading-text">Выполняется анализ каталога программ…</p>
                     </div>
                     <div id="results">
                         <div class="empty-state">
-                            <div class="icon">📋</div>
-                            <p>Заполните профиль и нажмите «Найти программы»<br>или «Демо-сценарий» для быстрой демонстрации</p>
+                            <p>Заполните профиль и нажмите «Найти программы».</p>
                         </div>
                     </div>
-                    <p class="footnote">
-                        Гибридный скоринг: <code>0.6 × семантика + 0.4 × нечёткий вывод</code>.
-                        Объяснения и трассировка формируются по правилам нечёткого модуля (§2.3 ВКР).
-                    </p>
                 </div>
             </section>
         </div>
@@ -629,9 +338,7 @@
         const results = document.getElementById('results');
         const errorMsg = document.getElementById('errorMsg');
         const submitBtn = document.getElementById('submitBtn');
-        const demoBtn = document.getElementById('demoBtn');
 
-        /* ——— Лингвистические термы для слайдеров ——— */
         function term3(value, lowMax, midMax, labels) {
             const v = Number(value);
             if (v <= lowMax) return labels[0];
@@ -663,7 +370,6 @@
         function setLoading(on) {
             loadingWrap.classList.toggle('active', on);
             submitBtn.disabled = on;
-            demoBtn.disabled = on;
         }
 
         function showError(message) {
@@ -701,26 +407,20 @@
                 let data = null;
                 try {
                     data = await res.json();
-                } catch (_) {
-                    /* тело не JSON */
-                }
+                } catch (_) {}
 
                 if (!res.ok) {
                     const detail = data?.detail;
                     const msg = typeof detail === 'string'
                         ? detail
                         : (Array.isArray(detail) ? detail.map(d => d.msg).join('; ') : null);
-                    throw new Error(msg || `Ошибка сервера (${res.status})`);
+                    throw new Error(msg || 'Ошибка сервера (' + res.status + ')');
                 }
 
                 renderResults(data);
             } catch (err) {
-                showError('Не удалось получить рекомендации. ' + (err.message || 'Проверьте, что запущен сервер (python demo_mvp.py).'));
-                results.innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">⚠️</div>
-                        <p>Запрос не выполнен. Исправьте параметры или перезапустите backend.</p>
-                    </div>`;
+                showError('Не удалось получить рекомендации. ' + (err.message || 'Проверьте, что запущен сервер.'));
+                results.innerHTML = '<div class="empty-state"><p>Запрос не выполнен.</p></div>';
             } finally {
                 setLoading(false);
             }
@@ -738,7 +438,7 @@
         function formatPrice(price) {
             const p = Number(price);
             if (!p || p === 0) return 'Бесплатно';
-            return p.toLocaleString('ru-RU') + ' ₽';
+            return p.toLocaleString('ru-RU') + ' руб.';
         }
 
         function formatFormat(fmt) {
@@ -747,79 +447,42 @@
             return map[f] || escapeHtml(fmt);
         }
 
-        function buildExplanationAccordion(exp) {
-            const items = exp.explanations || ['✓ Общее соответствие запросу'];
-            return items.map((text, idx) => {
-                const isRule = /правил|R\d|активир/i.test(text) || /\(\d+%\)/.test(text);
-                const panel = isRule
-                    ? 'Степень активации правила влияет на итоговый нечёткий скор рекомендации.'
-                    : (text.includes('бюджет') || text.includes('Бесплатн')
-                        ? 'Стоимость программы сопоставлена с лингвистической переменной «бюджет».'
-                        : 'Семантическое и содержательное соответствие вашей цели обучения.');
-                return `
-                <div class="accordion-item${idx === 0 ? ' open' : ''}">
-                    <button type="button" class="accordion-trigger" aria-expanded="${idx === 0}">
-                        <span class="check">✓</span>
-                        <span>${escapeHtml(text.replace(/^✓\s*/, ''))}</span>
-                        <span class="chev">▼</span>
-                    </button>
-                    <div class="accordion-panel">${escapeHtml(panel)}</div>
-                </div>`;
-            }).join('');
+        function buildExplainList(exp) {
+            const items = exp.explanations || ['Соответствует заданным критериям профиля.'];
+            return '<ul class="explain-list">' +
+                items.map(text => '<li>' + escapeHtml(String(text).replace(/^[\u2713\u2717○]\s*/, '')) + '</li>').join('') +
+                '</ul>';
         }
 
         function buildTraceTable(trace) {
-            if (!trace?.length) return '';
+            if (!trace || !trace.length) return '';
             const rows = trace.map(t => `
                 <tr>
-                    <td class="mono">${escapeHtml(t.rule_id)}</td>
-                    <td><span class="act-bar">${(t.activation * 100).toFixed(0)}%</span></td>
+                    <td>${escapeHtml(t.rule_id)}</td>
+                    <td>${(t.activation * 100).toFixed(0)}%</td>
                     <td>${escapeHtml((t.details || []).join('; '))}</td>
                     <td>${escapeHtml(t.conclusion || '—')}</td>
                 </tr>`).join('');
             return `
             <details class="trace-details">
                 <summary>Трассировка правил нечёткого вывода</summary>
-                <div class="trace-table-wrap">
-                    <table class="trace-table">
-                        <thead>
-                            <tr>
-                                <th>Rule ID</th>
-                                <th>Activation</th>
-                                <th>Details</th>
-                                <th>Conclusion</th>
-                            </tr>
-                        </thead>
-                        <tbody>${rows}</tbody>
-                    </table>
-                </div>
+                <table class="trace-table">
+                    <thead>
+                        <tr>
+                            <th>Правило</th>
+                            <th>Активация</th>
+                            <th>Детали</th>
+                            <th>Заключение</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
             </details>`;
         }
 
-        function bindAccordions(root) {
-            root.querySelectorAll('.accordion-trigger').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const item = btn.closest('.accordion-item');
-                    const open = item.classList.contains('open');
-                    item.parentElement.querySelectorAll('.accordion-item').forEach(el => {
-                        el.classList.remove('open');
-                        el.querySelector('.accordion-trigger')?.setAttribute('aria-expanded', 'false');
-                    });
-                    if (!open) {
-                        item.classList.add('open');
-                        btn.setAttribute('aria-expanded', 'true');
-                    }
-                });
-            });
-        }
-
         function renderResults(data) {
-            if (!data.recommendations?.length) {
-                results.innerHTML = `
-                    <div class="empty-state">
-                        <div class="icon">🔍</div>
-                        <p>Подходящие программы не найдены.<br>Попробуйте изменить бюджет, цель или интересы.</p>
-                    </div>`;
+            if (!data.recommendations || !data.recommendations.length) {
+                results.innerHTML = '<div class="empty-state"><p>Подходящие программы не найдены. Измените параметры профиля.</p></div>';
                 return;
             }
 
@@ -828,46 +491,37 @@
 
             let html = `
                 <div class="results-meta">
-                    Найдено: <strong>${data.recommendations.length}</strong> из <strong>${total}</strong> курсов
-                    · применено правил: <strong>${rules}</strong>
+                    Показано программ: ${data.recommendations.length} из ${total} в каталоге.
+                    Применено правил нечёткого вывода: ${rules}.
                 </div>
                 <div class="rec-list">`;
 
             data.recommendations.forEach((c, i) => {
                 const exp = data.explanations[c.id] || {
-                    explanations: ['✓ Соответствует заданным критериям'],
+                    explanations: ['Соответствует заданным критериям.'],
                     confidence: 0.7,
                     fuzzy_trace: []
                 };
                 const scorePercent = Math.round((c.score || 0) * 100);
-                const skills = (c.skills || []).slice(0, 5);
+                const skills = (c.skills || c.competencies || []).slice(0, 6);
 
                 html += `
                 <article class="rec-card">
                     <div class="rec-card-top">
-                        <div class="rec-rank">Рекомендация #${i + 1}</div>
-                        <div class="rec-card-header">
-                            <h3 class="rec-title">${escapeHtml(c.title)}</h3>
-                            <div class="score-ring" title="Соответствие профилю">
-                                ${scorePercent}<span>%</span>
-                            </div>
-                        </div>
+                        <div class="rec-rank">Рекомендация ${i + 1}</div>
+                        <h3 class="rec-title">${escapeHtml(c.title)}</h3>
+                        <p class="rec-score">Степень соответствия профилю: ${scorePercent}%</p>
                         <div class="rec-meta">
-                            <span class="rec-meta-item">🏫 <strong>${escapeHtml(c.provider || 'Платформа')}</strong></span>
-                            <span class="rec-meta-item">💵 <strong>${formatPrice(c.price)}</strong></span>
-                            <span class="rec-meta-item">📅 ~${escapeHtml(String(c.duration_estimate || '4–8'))} нед.</span>
-                            <span class="rec-meta-item">${c.language === 'ru' ? '🇷🇺 RU' : '🇬🇧 EN'}</span>
+                            Поставщик: ${escapeHtml(c.provider || 'не указан')}<br>
+                            Стоимость: ${formatPrice(c.price)}<br>
+                            Формат: ${formatFormat(c.format)}<br>
+                            Язык: ${c.language === 'ru' ? 'русский' : escapeHtml(c.language || 'не указан')}
                         </div>
-                        <div class="badge-row">
-                            <span class="badge badge-format">${formatFormat(c.format)}</span>
-                            ${skills.map(s => `<span class="badge badge-skill">${escapeHtml(s)}</span>`).join('')}
-                        </div>
+                        ${skills.length ? '<p class="rec-skills">Компетенции: ' + skills.map(escapeHtml).join(', ') + '</p>' : ''}
                     </div>
                     <div class="rec-card-body">
-                        <div class="accordion" data-accordion>
-                            ${buildExplanationAccordion(exp)}
-                        </div>
-                        <p class="confidence-line">Уверенность системы: <b>${exp.confidence ?? '—'}</b></p>
+                        ${buildExplainList(exp)}
+                        <p class="confidence-line">Уверенность системы в рекомендации: ${exp.confidence != null ? exp.confidence : '—'}</p>
                         ${buildTraceTable(exp.fuzzy_trace)}
                     </div>
                 </article>`;
@@ -875,22 +529,7 @@
 
             html += '</div>';
             results.innerHTML = html;
-            bindAccordions(results);
         }
-
-        function loadDemo() {
-            document.getElementById('budget').value = 50000;
-            document.getElementById('knowledge').value = 3;
-            document.getElementById('time').value = 6;
-            document.getElementById('career').value = '1.0';
-            document.getElementById('interests').value = 'анализ данных, python, автоматизация';
-            document.getElementById('goals').value = 'получить практические навыки для работы в IT';
-            updateBudgetTerm();
-            updateSliderTerms();
-            form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
-        }
-
-        demoBtn.addEventListener('click', loadDemo);
     </script>
 </body>
 </html>

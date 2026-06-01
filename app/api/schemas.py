@@ -48,7 +48,7 @@ class DialogStepRequest(BaseModel):
 
 
 class DialogStepResponse(BaseModel):
-    """Ответ POST /api/dialog/step."""
+    """Ответ POST /api/dialog/step (legacy)."""
 
     session_id: str
     next_question: Optional[str] = None
@@ -56,6 +56,31 @@ class DialogStepResponse(BaseModel):
     is_ready_for_recommend: bool
     profile_preview: Dict[str, Any] = Field(default_factory=dict)
     meta: Dict[str, Any] = Field(default_factory=dict)
+
+
+class DialogStartResponse(BaseModel):
+    """Ответ POST /api/dialog/start (§2.4)."""
+
+    session_id: str
+    initial_question: Optional[str] = None
+
+
+class DialogStepRequestV2(BaseModel):
+    """Тело POST /api/dialog/step — диалог §2.4."""
+
+    session_id: str
+    user_message: str = Field(default="", min_length=0)
+
+
+class DialogStepResponseV2(BaseModel):
+    """Ответ шага диалога с политикой и рекомендациями."""
+
+    session_id: str
+    next_action: str
+    question: Optional[str] = None
+    recommendations: Optional[List[Dict[str, Any]]] = None
+    belief_summary: Dict[str, Any] = Field(default_factory=dict)
+    is_ready: bool = False
 
 
 class WhatIfRequest(BaseModel):

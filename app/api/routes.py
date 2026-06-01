@@ -6,8 +6,6 @@ from typing import Optional
 from fastapi import APIRouter, HTTPException, Query
 
 from app.api.schemas import (
-    DialogStepRequest,
-    DialogStepResponse,
     GraphResponse,
     HealthResponse,
     RecommendationMeta,
@@ -16,9 +14,7 @@ from app.api.schemas import (
     WhatIfRequest,
     WhatIfResponse,
 )
-from app.core.session_store import session_store
 from app.dependencies import TEMPLATES_DIR, get_recommender
-from app.services.dialog_manager import process_dialog_turn
 from app.services.explainer import (
     apply_profile_changes,
     build_what_if_explanation,
@@ -26,7 +22,6 @@ from app.services.explainer import (
     profile_to_dict,
 )
 from app.services.competency_graph import get_competency_graph
-from app.services.nlu_parser import nlu_parser
 from app.user_profile import UserProfile
 
 logger = logging.getLogger(__name__)
@@ -70,35 +65,6 @@ async def recommend_api(req: RecommendationRequest):
         raise HTTPException(
             status_code=500,
             detail=f"Не удалось сформировать рекомендации: {e}",
-        ) from e
-
-
-@router.post("/dialog/step", response_model=DialogStepResponse)
-async def dialog_step(req: DialogStepRequest):
-    """Один шаг диалога: NLU → обновление belief → следующий вопрос."""
-    try:
-        session_id, belief = session_store.get_or_create(
-            req.session_id, req.prev_belief
-        )
-        nlu_result = nlu_parser.parse(req.user_message)
-        updated, next_q, ready, meta = process_dialog_turn(
-            belief, req.user_message, nlu_result
-        )
-        session_store.save(session_id, updated)
-
-        return DialogStepResponse(
-            session_id=session_id,
-            next_question=next_q,
-            updated_belief=updated.to_dict(),
-            is_ready_for_recommend=ready,
-            profile_preview=updated.to_profile_dict(),
-            meta=meta,
-        )
-    except Exception as e:
-        logger.error("Ошибка в /api/dialog/step: %s", e, exc_info=True)
-        raise HTTPException(
-            status_code=500,
-            detail=f"Ошибка диалогового шага: {e}",
         ) from e
 
 

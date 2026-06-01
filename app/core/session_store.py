@@ -6,7 +6,7 @@ import uuid
 from dataclasses import dataclass, field
 from typing import Dict, Optional
 
-from app.services.dialog_manager import BeliefState
+from app.services.belief_state import BeliefState
 
 DEFAULT_TTL_SECONDS = 30 * 60  # 30 минут
 

@@ -97,6 +97,15 @@ class HybridRecommender:
     def recommend(self, profile: UserProfile, top_k: int = 5) -> List[Dict]:
         return self.score_all(profile)[:top_k]
 
+    def recommend_from_belief(self, belief: Any, top_k: int = 5) -> List[Dict]:
+        """Рекомендации по состоянию диалога (§2.4)."""
+        from app.services.belief_state import BeliefState as _BeliefState
+
+        if not isinstance(belief, _BeliefState):
+            raise TypeError("Ожидается BeliefState")
+        profile = belief.to_user_profile()
+        return self.recommend(profile, top_k=top_k)
+
     def rank_course(self, profile: UserProfile, course_id: str) -> Dict[str, Any]:
         """Позиция курса в общем рейтинге (1-based)."""
         ranked = self.score_all(profile)

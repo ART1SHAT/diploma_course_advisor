@@ -8,6 +8,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 
 from app.api.routes import router as api_router
+from app.api.routes_dialog import router as dialog_router
 from app.dependencies import TEMPLATES_DIR
 
 # Экспорт для demo_mvp и тестов
@@ -58,6 +59,7 @@ def create_app() -> FastAPI:
         )
 
     application.include_router(api_router, prefix="/api")
+    application.include_router(dialog_router, prefix="/api")
 
     return application
 
