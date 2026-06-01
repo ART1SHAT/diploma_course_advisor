@@ -1,104 +1,228 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
-    <title>Course Advisor</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 CourseAdvisor — Информационно-советующая система</title>
     <style>
-
-        body{
-            font-family: Arial;
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 20px;
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --success: #16a34a;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --text-secondary: #475569;
+            --border: #e2e8f0;
+            --radius: 12px;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
         }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: var(--bg); color: var(--text); line-height: 1.5; padding: 20px; }
+        .container { max-width: 1100px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 2rem; }
+        header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; color: var(--text); }
+        header p { color: var(--text-secondary); font-size: 0.95rem; }
+        header .badge { display: inline-block; background: #dbeafe; color: var(--primary); padding: 2px 8px; border-radius: 99px; font-size: 0.75rem; margin-top: 6px; }
 
-        input{
-            width:100%;
-            padding:12px;
-            margin-bottom:15px;
-        }
+        .grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.5rem; }
+        @media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }
 
-        button{
-            padding:12px 20px;
-            cursor:pointer;
-        }
+        .card { background: var(--card); border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow); border: 1px solid var(--border); }
+        .card h3 { margin-bottom: 1rem; font-size: 1.1rem; display: flex; align-items: center; gap: 8px; }
 
-        .course{
-            border:1px solid #ddd;
-            padding:15px;
-            margin-top:15px;
-            border-radius:8px;
-        }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; font-weight: 500; margin-bottom: 6px; font-size: 0.9rem; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; transition: border 0.2s; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px #bfdbfe; }
+        .slider-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--text-secondary); margin-top: 4px; }
+        .btn { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 500; cursor: pointer; transition: background 0.2s; font-size: 1rem; }
+        .btn:hover { background: var(--primary-dark); }
+        .btn.secondary { background: #64748b; margin-top: 10px; font-size: 0.9rem; padding: 8px; }
 
+        .results-area { min-height: 200px; }
+        .loader { text-align: center; padding: 3rem; color: var(--text-secondary); display: none; }
+        .loader.active { display: block; }
+        .loader::after { content: ""; display: inline-block; width: 24px; height: 24px; border: 3px solid #cbd5e1; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; margin-left: 10px; vertical-align: middle; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .rec-card { border-left: 4px solid var(--success); padding: 1rem; margin-bottom: 1rem; background: #f0fdf4; border-radius: 8px; }
+        .rec-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; flex-wrap: wrap; gap: 8px; }
+        .rec-title { font-weight: 600; color: #0f172a; }
+        .rec-score { background: var(--success); color: white; padding: 2px 8px; border-radius: 6px; font-size: 0.85rem; font-weight: 500; }
+        .rec-meta { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 8px; display: flex; gap: 12px; flex-wrap: wrap; }
+        .rec-tags { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+        .tag { background: #e2e8f0; color: #334155; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; }
+        .explanation-box { background: white; padding: 8px; border-radius: 6px; border: 1px solid var(--border); font-size: 0.85rem; margin-top: 8px; }
+        .explanation-box ul { padding-left: 1.2rem; margin: 6px 0; }
+        .explanation-box li { margin-bottom: 4px; }
+        .fuzzy-trace { font-family: monospace; background: #f8fafc; padding: 6px; border-radius: 4px; font-size: 0.75rem; color: #475569; margin-top: 6px; border: 1px dashed #cbd5e1; }
+
+        .info-note { font-size: 0.8rem; color: #64748b; margin-top: 1rem; padding: 8px; background: #f1f5f9; border-radius: 6px; border-left: 3px solid #94a3b8; }
+        .error { color: #dc2626; background: #fef2f2; padding: 10px; border-radius: 6px; margin-top: 10px; display: none; }
     </style>
 </head>
-
 <body>
+    <div class="container">
+        <header>
+            <h1>🎓 CourseAdvisor</h1>
+            <p>Информационно-советующая система для выбора программы обучения на основе лингвистических моделей</p>
+            <span class="badge">MVP для предзащиты | Гибридный скоринг + Нечёткий вывод</span>
+        </header>
 
-<h1>Информационно-советующая система выбора курсов</h1>
+        <div class="grid">
+            <!-- Левая колонка: Форма профиля -->
+            <div class="card">
+                <h3>👤 Ваш профиль (лингвистические переменные)</h3>
+                <form id="profileForm">
+                    <div class="form-group">
+                        <label>💰 Бюджет на обучение (₽)</label>
+                        <input type="number" id="budget" value="50000" min="0" step="5000">
+                    </div>
+                    <div class="form-group">
+                        <label>📚 Уровень знаний (0–10)</label>
+                        <input type="range" id="knowledge" min="0" max="10" value="3" step="1" oninput="document.getElementById('knowVal').textContent=this.value">
+                        <div class="slider-label"><span>Начальный</span><span id="knowVal">3</span><span>Продвинутый</span></div>
+                    </div>
+                    <div class="form-group">
+                        <label>⏱️ Время на обучение (часов/неделю)</label>
+                        <input type="range" id="time" min="1" max="20" value="6" step="1" oninput="document.getElementById('timeVal').textContent=this.value">
+                        <div class="slider-label"><span>Мало</span><span id="timeVal">6</span><span>Много</span></div>
+                    </div>
+                    <div class="form-group">
+                        <label>🎯 Цель обучения</label>
+                        <select id="career">
+                            <option value="1.0" selected>Быстрое трудоустройство</option>
+                            <option value="0.5">Академическая подготовка / ЕГЭ</option>
+                            <option value="0.0">Личное развитие / хобби</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>🔍 Интересы (через запятую)</label>
+                        <input type="text" id="interests" value="анализ данных, python, автоматизация">
+                    </div>
+                    <div class="form-group">
+                        <label>💬 Ключевая цель / запрос</label>
+                        <input type="text" id="goals" value="получить практические навыки для работы в IT">
+                    </div>
+                    <button type="submit" class="btn">🔍 Найти программы</button>
+                    <button type="button" class="btn secondary" onclick="loadDemo()">⚡ Загрузить демо-сценарий</button>
+                </form>
+                <div id="errorMsg" class="error"></div>
+            </div>
 
-<form action="/recommend" method="post">
+            <!-- Правая колонка: Результаты -->
+            <div class="card results-area">
+                <h3>✨ Рекомендации</h3>
+                <div id="loader" class="loader">Анализирую базу курсов с применением нечёткого вывода...</div>
+                <div id="results"></div>
+                <div class="info-note">
+                    📘 Система использует гибридный скоринг: <code>0.6 × семантическая близость + 0.4 × нечёткий вывод</code>. 
+                    Объяснения формируются на основе трассировки правил (§2.3 диплома).
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <label>Ваш запрос</label>
+    <script>
+        const form = document.getElementById('profileForm');
+        const loader = document.getElementById('loader');
+        const results = document.getElementById('results');
+        const errorMsg = document.getElementById('errorMsg');
 
-    <input
-        type="text"
-        name="query"
-        placeholder="Например: хочу стать дата аналитиком"
-        required
-    >
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorMsg.style.display = 'none';
+            loader.classList.add('active');
+            results.innerHTML = '';
 
-    <label>Количество рекомендаций</label>
+            const payload = {
+                budget: parseFloat(document.getElementById('budget').value) || 50000,
+                knowledge_level: parseFloat(document.getElementById('knowledge').value),
+                time_availability: parseFloat(document.getElementById('time').value),
+                career_focus: parseFloat(document.getElementById('career').value),
+                interests: document.getElementById('interests').value.split(',').map(s => s.trim()).filter(Boolean),
+                goals: document.getElementById('goals').value
+            };
 
-    <input
-        type="number"
-        name="top_k"
-        value="5"
-    >
+            try {
+                const res = await fetch('/api/recommend', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!res.ok) throw new Error(`Ошибка сервера: ${res.status}`);
+                
+                const data = await res.json();
+                renderResults(data);
+            } catch (err) {
+                errorMsg.textContent = `❌ ${err.message}. Убедитесь, что запущен FastAPI сервер.`;
+                errorMsg.style.display = 'block';
+            } finally {
+                loader.classList.remove('active');
+            }
+        });
 
-    <button type="submit">
-        Подобрать курсы
-    </button>
+        function renderResults(data) {
+            if (!data.recommendations?.length) {
+                results.innerHTML = '<p style="color:#64748b; text-align:center; padding:2rem">Подходящие программы не найдены. Попробуйте изменить параметры.</p>';
+                return;
+            }
 
-</form>
+            let html = `<p style="font-size:0.85rem; color:#64748b; margin-bottom:10px">Найдено: ${data.recommendations.length} из ${data.meta?.total_courses_in_db || '?'} курсов | Применено правил: ${data.meta?.fuzzy_rules_count || 0}</p>`;
+            
+            data.recommendations.forEach((c, i) => {
+                const exp = data.explanations[c.id] || { explanations: ["✓ Соответствует заданным критериям"], confidence: 0.7, fuzzy_trace: [] };
+                const price = c.price === 0 ? 'Бесплатно' : `${c.price.toLocaleString()} ₽`;
+                const scorePercent = Math.round(c.score * 100);
 
-{% if results %}
+                html += `
+                <div class="rec-card">
+                    <div class="rec-header">
+                        <span class="rec-title">${i + 1}. ${c.title}</span>
+                        <span class="rec-score">${scorePercent}%</span>
+                    </div>
+                    <div class="rec-meta">
+                        <span>🏫 ${c.provider || 'Платформа'}</span>
+                        <span>📅 ~${c.duration_estimate || '4-8'} нед</span>
+                        <span>💵 ${price}</span>
+                        <span>🌐 ${c.language === 'ru' ? '🇷🇺' : '🇬🇧'}</span>
+                    </div>
+                    <div class="rec-tags">
+                        ${(c.skills || []).slice(0, 4).map(s => `<span class="tag">${s}</span>`).join('')}
+                        <span class="tag">${c.format || 'online'}</span>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>Почему рекомендовано:</strong>
+                        <ul>
+                            ${(exp.explanations || []).map(e => `<li>${e}</li>`).join('')}
+                        </ul>
+                        <div style="font-size:0.8rem; color:#64748b">Уверенность системы: <b>${exp.confidence}</b></div>
+                    </div>
+                    ${exp.fuzzy_trace?.length ? `
+                    <details style="margin-top:6px">
+                        <summary style="cursor:pointer; font-size:0.8rem; color:#475569">🔍 Трассировка нечётких правил</summary>
+                        <div class="fuzzy-trace">
+                            ${exp.fuzzy_trace.map(t => `[${t.rule_id}] ${t.rule_name} → активация: ${(t.activation*100).toFixed(0)}% | ${t.details.join('; ')}`).join('<br>')}
+                        </div>
+                    </details>` : ''}
+                </div>`;
+            });
+            results.innerHTML = html;
+        }
 
-<hr>
-
-<h2>Результаты</h2>
-
-{% for course in results %}
-
-<div class="course">
-
-    <h3>{{ course.title }}</h3>
-
-    <p>
-        <b>Категория:</b>
-        {{ course.category }}
-    </p>
-
-    <p>
-        <b>Рейтинг:</b>
-        {{ "%.3f"|format(course.final_score) }}
-    </p>
-
-    <p>
-        <a href="{{ course.url }}"
-           target="_blank">
-           Открыть курс
-        </a>
-    </p>
-
-</div>
-
-{% endfor %}
-
-{% endif %}
-
+        function loadDemo() {
+            document.getElementById('budget').value = 50000;
+            document.getElementById('knowledge').value = 3;
+            document.getElementById('knowVal').textContent = '3';
+            document.getElementById('time').value = 6;
+            document.getElementById('timeVal').textContent = '6';
+            document.getElementById('career').value = '1.0';
+            document.getElementById('interests').value = 'анализ данных, python, автоматизация';
+            document.getElementById('goals').value = 'получить практические навыки для работы в IT';
+            form.dispatchEvent(new Event('submit'));
+        }
+    </script>
 </body>
 </html>
