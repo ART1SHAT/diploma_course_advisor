@@ -1,99 +1,214 @@
-# app/recommender.py (обновлённая версия)
-from typing import List, Dict, Optional
+# app/recommender.py — ULTRA-SAFE версия для MVP
+from typing import List, Dict, Optional, Union, Any
 import pandas as pd
+import numpy as np
 from app.fuzzy_engine import FuzzyInferenceEngine
 from app.user_profile import UserProfile
 from app.course_loader import CourseLoader
-from sentence_transformers import SentenceTransformer, util
-import numpy as np
+import re
+
+def to_scalar(val: Any, default: Any = None) -> Any:
+    """Гарантированно возвращает скалярное значение из любого pandas-типа"""
+    if val is None:
+        return default
+    if isinstance(val, (pd.Series, np.ndarray)):
+        if len(val) == 0:
+            return default
+        val = val.iloc[0] if hasattr(val, 'iloc') else val.item()
+    if isinstance(val, (np.generic, np.bool_)):
+        return val.item()
+    if pd.isna(val):
+        return default
+    return val
+
+def to_str(val: Any, default: str = "") -> str:
+    """Безопасное преобразование в строку"""
+    scalar = to_scalar(val, default)
+    return str(scalar).strip() if scalar is not None else default
+
+def to_float(val: Any, default: float = 0.0) -> float:
+    """Безопасное преобразование в float"""
+    try:
+        scalar = to_scalar(val, default)
+        return float(scalar) if scalar is not None else default
+    except (ValueError, TypeError):
+        return default
 
 class HybridRecommender:
-    """Рекомендатель: семантика + нечёткая логика + реальные данные"""
+    """Рекомендатель с максимальной защитой от pandas-ошибок"""
     
     def __init__(self, csv_path: str = "data/courses_processed.csv", 
-                 model_name: str = "paraphrase-multilingual-MiniLM-L12-v2"):
+                 use_embeddings: bool = False):
         self.fuzzy_engine = FuzzyInferenceEngine()
         self.loader = CourseLoader(csv_path)
         
-        # Загрузка курсов
-        df = self.loader.load(limit=500)  # MVP: первые 500 для скорости
-        self.courses = self.loader.to_dict_list(df)
+        # Загружаем данные
+        df = self.loader.load(limit=500)
+        self.courses = self._convert_to_safe_list(df)
         
-        # Инициализация эмбеддингов (кэширование)
-        try:
-            self.model = SentenceTransformer(model_name)
-            self._precompute_embeddings()
-        except Exception as e:
-            print(f"⚠️ Не удалось загрузить модель эмбеддингов: {e}")
-            print("💡 Используем fallback на ключевые слова")
-            self.model = None
-            self.course_embeddings = None
+        # Эмбеддинги отключены для стабильности
+        self.use_embeddings = False
+        print(f"✅ Recommender initialized with {len(self.courses)} courses")
     
-    def _precompute_embeddings(self):
-        """Предварительное вычисление эмбеддингов описаний"""
-        if self.model and self.courses:
-            texts = [f"{c['title']} {c['description'][:500]}" for c in self.courses]
-            self.course_embeddings = self.model.encode(texts, convert_to_tensor=True)
+    def _convert_to_safe_list(self, df: pd.DataFrame) -> List[Dict]:
+        """Конвертирует DataFrame в список словарей с ТОЛЬКО скалярными значениями"""
+        courses = []
+        for idx, row in df.iterrows():
+            try:
+                course = {
+                    "id": to_str(row.get('course_id'), f"unknown_{idx}"),
+                    "title": to_str(row.get('title'), 'Без названия'),
+                    "description": to_str(row.get('description'), ''),
+                    "price": to_float(row.get('price'), 0),
+                    "language": to_str(row.get('language'), 'ru'),
+                    "url": to_str(row.get('url'), ''),
+                    "category": to_str(row.get('category'), 'Other'),
+                    "skills": self._extract_skills(
+                        to_str(row.get('description')), 
+                        to_str(row.get('category'))
+                    ),
+                    "format": self._infer_format(to_str(row.get('description'))),
+                    "duration_estimate": self._infer_duration(to_str(row.get('description'))),
+                    "type": self._infer_course_type(
+                        to_str(row.get('category')), 
+                        to_str(row.get('description'))
+                    ),
+                }
+                # Финальная проверка: все значения должны быть скалярами
+                for k, v in course.items():
+                    if isinstance(v, (pd.Series, np.ndarray, list)) and k != 'skills':
+                        course[k] = str(v.iloc[0]) if hasattr(v, 'iloc') else str(v)
+                courses.append(course)
+            except Exception as e:
+                print(f"⚠️  Пропущена строка {idx}: {e}")
+                continue
+        return courses
+    
+    def _extract_skills(self, description: str, category: str) -> List[str]:
+        """Извлечение навыков — только со строками"""
+        if not isinstance(description, str):
+            description = ""
+        if not isinstance(category, str):
+            category = ""
+            
+        skills = []
+        if category and category != 'Other':
+            skills.append(category.lower())
+        
+        skill_keywords = {
+            'python': ['python', 'django', 'flask', 'fastapi'],
+            'sql': ['sql', 'postgresql', 'mysql', 'база данных'],
+            'анализ данных': ['анализ данных', 'pandas', 'numpy', 'визуализация'],
+            'машинное обучение': ['машинное обучение', 'ml', 'нейросеть', 'scikit'],
+            'веб-разработка': ['веб', 'html', 'css', 'javascript', 'frontend', 'backend'],
+            'английский': ['английский', 'english', 'language', 'язык'],
+            'математика': ['математика', 'алгебра', 'геометрия', 'статистика'],
+            'тестирование': ['тестирование', 'qa', 'автотест', 'selenium'],
+        }
+        
+        desc_lower = description.lower()
+        for skill, keywords in skill_keywords.items():
+            if any(kw in desc_lower for kw in keywords):
+                skills.append(skill)
+        return list(set(skills))
+    
+    def _infer_format(self, description: str) -> str:
+        desc = description.lower() if isinstance(description, str) else ""
+        if any(w in desc for w in ['онлайн', 'самостоя', 'гибк', 'дистанц']):
+            return 'online'
+        elif any(w in desc for w in ['очно', 'аудитория', 'лекция', 'группа']):
+            return 'offline'
+        return 'online'
+    
+    def _infer_duration(self, description: str) -> Optional[int]:
+        desc = description.lower() if isinstance(description, str) else ""
+        weeks = re.findall(r'(\d+)\s*(нед|недель|неделя|неделю)', desc)
+        if weeks:
+            try:
+                return int(weeks[0][0])
+            except:
+                pass
+        hours = re.findall(r'(\d+)\s*(час|часов|часа|ч\.)', desc)
+        if hours:
+            try:
+                return max(1, int(hours[0][0]) // 4)
+            except:
+                pass
+        return None
+    
+    def _infer_course_type(self, category: str, description: str) -> str:
+        desc = description.lower() if isinstance(description, str) else ""
+        cat = category.lower() if isinstance(category, str) else ""
+        
+        if any(w in desc for w in ['интенсив', 'практик', 'проект', 'быстро', 'старт']):
+            return 'practical_intensive'
+        if any(w in desc for w in ['теория', 'фундамент', 'академ', 'егэ', 'олимпиад']):
+            return 'theoretical_comprehensive'
+        if any(w in desc for w in ['бесплат', 'бюджет', 'доступ']):
+            return 'budget_friendly'
+        if any(w in desc for w in ['сертификат', 'диплом', 'премиум', 'карьера']):
+            return 'premium_certified'
+        if any(w in desc for w in ['самостоя', 'гибк', 'хобби', 'личн', 'для себя']):
+            return 'flexible_selfpaced'
+        if cat in ['python', 'programming', 'it']:
+            return 'practical_intensive'
+        if cat in ['mathematics', 'school', 'ege']:
+            return 'theoretical_comprehensive'
+        return 'flexible_selfpaced'
     
     def _semantic_score(self, profile: UserProfile, course: Dict) -> float:
-        """Семантический скор: эмбеддинги + ключевые слова"""
+        """Семантический скор — только со скалярными строками"""
         score = 0.0
         
-        # 1. Эмбеддинг-поиск (если модель загружена)
-        if self.model and self.course_embeddings is not None:
-            query = f"{profile.goals} {' '.join(profile.interests)}"
-            query_emb = self.model.encode(query, convert_to_tensor=True)
-            
-            # Находим индекс курса в списке
-            try:
-                idx = next(i for i, c in enumerate(self.courses) if c['id'] == course['id'])
-                sim = util.cos_sim(query_emb, self.course_embeddings[idx])[0][0].item()
-                score += max(0, sim) * 0.7  # 70% веса на эмбеддинги
-            except StopIteration:
-                pass
+        # Гарантируем строки
+        desc = to_str(course.get('description'), '')
+        title = to_str(course.get('title'), '')
+        skills = course.get('skills', []) or []
         
-        # 2. Ключевые слова (fallback + дополнение)
-        text = (course.get('description', '') + ' ' + 
-                course.get('title', '') + ' ' +
-                ' '.join(course.get('skills', []))).lower()
+        text = f"{desc} {title} {' '.join(skills)}".lower()
         
-        for interest in profile.interests:
-            if interest.lower() in text:
+        # Интересы
+        interests = profile.interests or []
+        for interest in interests:
+            if interest and isinstance(interest, str) and interest.lower() in text:
                 score += 0.15
-        if profile.goals and profile.goals.lower() in text:
+        
+        # Цель
+        goals = profile.goals or ""
+        if isinstance(goals, str) and goals.lower() in text:
             score += 0.2
         
-        # 3. Соответствие категории
-        if profile.interests:
-            cat = course.get('category', '').lower()
-            if any(interest.lower() == cat for interest in profile.interests):
+        # Категория
+        cat = to_str(course.get('category'), '').lower()
+        for interest in interests:
+            if interest and isinstance(interest, str) and interest.lower() == cat:
                 score += 0.1
+                break
         
         return min(score, 1.0)
     
     def _fuzzy_score(self, profile: UserProfile, course: Dict) -> float:
-        """Нечёткий скор на основе правил"""
+        """Нечёткий скор"""
         fuzzy_input = profile.to_fuzzy_input()
         if not fuzzy_input:
             return 0.5
         
         conclusions = self.fuzzy_engine.infer(fuzzy_input)
-        course_type = course.get('type', '')
+        course_type = to_str(course.get('type'), '')
         
-        # Сопоставление типа курса с выводами движка
         score = 0.0
         for concl_type, weight in conclusions.items():
             if concl_type == course_type:
                 score += weight * 0.9
-            # Частичное совпадение по ключевым словам типа
-            elif any(kw in course.get('description', '').lower() 
-                    for kw in self._get_type_keywords(concl_type)):
-                score += weight * 0.4
+            else:
+                desc = to_str(course.get('description'), '')
+                keywords = self._get_type_keywords(concl_type)
+                if any(kw in desc.lower() for kw in keywords):
+                    score += weight * 0.4
         
         return min(score, 1.0)
     
     def _get_type_keywords(self, course_type: str) -> List[str]:
-        """Ключевые слова для каждого типа курса"""
         mapping = {
             'practical_intensive': ['интенсив', 'практика', 'проект', 'быстро', 'навык'],
             'theoretical_comprehensive': ['теория', 'фундамент', 'егэ', 'академ', 'математик'],
@@ -104,75 +219,84 @@ class HybridRecommender:
         return mapping.get(course_type, [])
     
     def recommend(self, profile: UserProfile, top_k: int = 5) -> List[Dict]:
-        """Основной метод рекомендаций"""
+        """Основной метод — с безопасными сравнениями"""
         scored = []
         
         for course in self.courses:
-            # Фильтры по обязательным критериям
-            if profile.budget and course['price'] > profile.budget * 1.5:
-                continue  # курс значительно дороже бюджета
+            # Безопасная фильтрация по бюджету
+            course_price = to_float(course.get('price'), 0)
+            profile_budget = profile.budget
+            
+            # Явное сравнение скаляров
+            if profile_budget is not None and isinstance(profile_budget, (int, float)):
+                if course_price > profile_budget * 1.5:
+                    continue
             
             sem_score = self._semantic_score(profile, course)
             fuzzy_score = self._fuzzy_score(profile, course)
             
-            # Гибридная формула
             final_score = 0.6 * sem_score + 0.4 * fuzzy_score
             
             scored.append({**course, "score": round(final_score, 3)})
         
-        # Сортировка и возврат топ-k
-        return sorted(scored, key=lambda x: x["score"], reverse=True)[:top_k]
+        # Сортировка
+        try:
+            return sorted(scored, key=lambda x: float(x.get("score", 0)), reverse=True)[:top_k]
+        except:
+            return scored[:top_k]
     
     def explain(self, profile: UserProfile, course: Dict) -> Dict:
-        """Генерация объяснения рекомендации"""
+        """Генерация объяснений"""
         trace = self.fuzzy_engine.get_trace(profile.to_fuzzy_input())
         explanations = []
         
-        # 1. Соответствие целям
-        if profile.goals:
-            desc = course.get('description', '').lower()
-            if profile.goals.lower() in desc:
-                explanations.append(f"✓ Курс соответствует вашей цели: «{profile.goals}»")
+        # Цели
+        goals = profile.goals or ""
+        desc = to_str(course.get('description'), '')
+        if isinstance(goals, str) and goals and goals.lower() in desc.lower():
+            explanations.append(f"✓ Курс соответствует вашей цели: «{goals}»")
         
-        # 2. Активные нечёткие правила
+        # Правила
         for t in trace:
-            if t["activation"] > 0.25:
-                explanations.append(f"✓ {t['rule_name']} (уверенность: {t['activation']:.0%})")
+            if t.get("activation", 0) > 0.25:
+                explanations.append(f"✓ {t.get('rule_name', '')} (уверенность: {t['activation']:.0%})")
         
-        # 3. Навыки и интересы
-        matched_skills = [s for s in course.get('skills', []) 
-                         if any(s.lower() in i.lower() for i in profile.interests)]
+        # Навыки
+        matched_skills = [
+            s for s in (course.get('skills') or []) 
+            if any(str(s).lower() in str(i).lower() for i in (profile.interests or []))
+        ]
         if matched_skills:
             explanations.append(f"✓ Развивает навыки: {', '.join(matched_skills[:3])}")
         
-        # 4. Практические параметры
-        if profile.budget:
-            price = course.get('price', 0)
+        # Бюджет
+        if profile.budget is not None:
+            price = to_float(course.get('price'), 0)
             if price == 0:
                 explanations.append("✓ Бесплатный курс")
             elif price <= profile.budget:
                 explanations.append(f"✓ Укладывается в бюджет ({int(price)} ₽)")
         
-        if course.get('language') == profile.__dict__.get('preferred_language', 'ru'):
-            explanations.append(f"✓ На русском языке")
+        # Язык и категория
+        if to_str(course.get('language'), 'ru') == 'ru':
+            explanations.append("✓ На русском языке")
         
-        # 5. Категория
         cat = course.get('category')
         if cat and cat != 'Other':
             explanations.append(f"✓ Категория: {cat}")
         
         return {
-            "course_id": course.get("id"),
+            "course_id": to_str(course.get("id"), ""),
             "explanations": explanations if explanations else ["✓ Рекомендовано на основе общего соответствия"],
-            "confidence": round(sum(t["activation"] for t in trace) / max(len(trace), 1), 2),
+            "confidence": round(sum(t.get("activation", 0) for t in trace) / max(len(trace), 1), 2),
             "fuzzy_trace": trace
         }
     
     def get_stats(self) -> Dict:
-        """Статистика по базе курсов для демо"""
+        """Статистика"""
         df = self.loader.load()
         return {
-            "total_courses": len(df),
+            "total_courses": int(len(df)),
             "categories": df['category'].value_counts().head(5).to_dict(),
             "price_range": {
                 "min": float(df['price'].min()),

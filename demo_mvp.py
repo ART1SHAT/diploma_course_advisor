@@ -1,50 +1,84 @@
-# demo_mvp.py (финальная версия)
+# demo_mvp.py — Единая точка входа для предзащиты
 """
-🎓 CourseAdvisor — MVP для предзащиты
-Работает с courses_processed.csv из репозитория
+🎓 CourseAdvisor MVP
 Запуск: python demo_mvp.py
+Открыть: http://localhost:8000
 """
 
-from fastapi import FastAPI, HTTPException
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse, JSONResponse
+import uvicorn
+from pathlib import Path
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
 from typing import List, Optional
-import uvicorn
-import json
 
+# Импорты наших модулей
 from app.fuzzy_engine import FuzzyInferenceEngine
 from app.user_profile import UserProfile
 from app.recommender import HybridRecommender
 
-app = FastAPI(title="CourseAdvisor MVP", version="0.2.0")
+app = FastAPI(title="CourseAdvisor MVP", version="1.0.0")
 
-# Инициализация (ленивая загрузка)
+# Пути
+BASE_DIR = Path(__file__).resolve().parent
+TEMPLATES_DIR = BASE_DIR / "templates"
+
+# Инициализация Jinja2
+templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
+
+# Ленивая инициализация рекомендателя
 _recommender = None
 
 def get_recommender():
     global _recommender
     if _recommender is None:
-        print("🔄 Загрузка курсов из courses_processed.csv...")
+        print("🔄 Загрузка курсов из data/courses_processed.csv...")
         _recommender = HybridRecommender(csv_path="data/courses_processed.csv")
-        print(f"✅ Загружено {_recommender.loader.load().shape[0]} курсов")
+        count = _recommender.loader.load().shape[0]
+        print(f"✅ Загружено {count} курсов")
     return _recommender
 
+# Модель запроса
 class RecommendationRequest(BaseModel):
-    budget: Optional[float] = Field(default=None, ge=0, description="Бюджет в рублях")
-    knowledge_level: Optional[float] = Field(default=None, ge=0, le=10, description="Уровень знаний 0-10")
-    time_availability: Optional[float] = Field(default=None, ge=0, description="Часов в неделю")
-    career_focus: Optional[float] = Field(default=None, ge=0, le=1, description="0=personal, 0.5=academic, 1=employment")
-    interests: List[str] = Field(default_factory=list, description="Список интересов")
-    goals: str = Field(default="", description="Основная цель обучения")
-    preferred_language: str = Field(default="ru", description="Предпочтительный язык курса")
+    budget: Optional[float] = Field(default=None, ge=0)
+    knowledge_level: Optional[float] = Field(default=None, ge=0, le=10)
+    time_availability: Optional[float] = Field(default=None, ge=0)
+    career_focus: Optional[float] = Field(default=None, ge=0, le=1)
+    interests: List[str] = Field(default_factory=list)
+    goals: str = Field(default="")
 
+# 🏠 Главная страница — отдаёт index.html
+# ✅ Стало (новый стиль — 3 варианта на выбор):
+
+# Вариант 1: позиционные аргументы (самый короткий)
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse(request, "index.html", {"request": request})
+
+# Вариант 2: именованные аргументы (самый понятный)
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html", 
+        context={"request": request}
+    )
+
+# Вариант 3: универсальный (работает в старых и новых версиях)
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse(
+        name="index.html",
+        context={"request": request},
+        request=request  # явная передача request как именованного аргумента
+    )
+
+# 🔍 API рекомендаций
 @app.post("/api/recommend")
-async def recommend(req: RecommendationRequest):
-    """Основной эндпоинт рекомендаций"""
+async def recommend_api(req: RecommendationRequest):
     try:
-        recommender = get_recommender()
-        
+        rec = get_recommender()
         profile = UserProfile(
             budget=req.budget,
             knowledge_level=req.knowledge_level,
@@ -53,76 +87,67 @@ async def recommend(req: RecommendationRequest):
             interests=req.interests,
             goals=req.goals
         )
-        
-        recommendations = recommender.recommend(profile, top_k=5)
+        recommendations = rec.recommend(profile, top_k=5)
         explanations = {
-            c["id"]: recommender.explain(profile, c) 
+            c["id"]: rec.explain(profile, c) 
             for c in recommendations
         }
-        
         return {
             "recommendations": recommendations,
             "explanations": explanations,
             "meta": {
                 "fuzzy_rules_count": len(FuzzyInferenceEngine().rules),
-                "profile_params_filled": len([v for v in profile.to_fuzzy_input().values() if v is not None]),
-                "total_courses_in_db": recommender.loader.load().shape[0]
+                "total_courses_in_db": rec.loader.load().shape[0]
             }
         }
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"❌ Error in /api/recommend: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/courses/stats")
-async def get_course_stats():
-    """Статистика по базе курсов"""
-    try:
-        recommender = get_recommender()
-        return recommender.get_stats()
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
+# 🩺 Health check
 @app.get("/api/health")
 async def health():
     return {
-        "status": "ok", 
-        "components": ["fuzzy_engine", "recommender", "course_loader", "explanations"],
-        "data_source": "courses_processed.csv"
+        "status": "ok",
+        "components": ["fuzzy_engine", "recommender", "course_loader"],
+        "templates_path": str(TEMPLATES_DIR),
+        "templates_exists": TEMPLATES_DIR.exists()
     }
 
-# Статика
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
-
-@app.get("/demo")
-async def demo_page():
-    return FileResponse("frontend/index.html")
-
-@app.get("/")
-async def root():
-    return {
-        "message": "🎓 CourseAdvisor MVP",
-        "docs": "/docs", 
-        "demo": "/demo",
-        "health": "/api/health",
-        "stats": "/api/courses/stats"
-    }
+# 📊 Статистика курсов
+@app.get("/api/courses/stats")
+async def course_stats():
+    try:
+        rec = get_recommender()
+        return rec.get_stats()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
     print("""
     ╔════════════════════════════════════════════════╗
-    ║  🎓 CourseAdvisor — MVP для предзащиты v0.2    ║
+    ║  🎓 CourseAdvisor — MVP для предзащиты         ║
     ╠════════════════════════════════════════════════╣
-    ║  📊 Данные: courses_processed.csv (~4400 курсов)║
-    ║  🧠 Движок: нечёткая логика + семантический    ║
+    ║  ✅ Сервер запущен                              ║
+    ║  🔗 Откройте: http://localhost:8000            ║
     ║                                                ║
-    ║  🔗 Откройте: http://localhost:8000/demo       ║
-    ║                                                ║
-    ║  📋 Сценарий демо:                             ║
-    ║  1. Бюджет: 50000 ₽                            ║
-    ║  2. Уровень: 3/10 (новичок)                    ║
-    ║  3. Время: 5 ч/нед                             ║
-    ║  4. Цель: трудоустройство                      ║
-    ║  5. Интересы: "анализ данных, python"          ║
+    ║  📋 Проверка перед демо:                       ║
+    ║  1. /api/health → статус компонентов          ║
+    ║  2. / → веб-интерфейс                          ║
+    ║  3. Заполнить профиль → "Найти программы"      ║
     ╚════════════════════════════════════════════════╝
     """)
-    uvicorn.run("demo_mvp:app", host="0.0.0.0", port=8000, reload=False)
+    
+    # Проверка наличия templates/index.html
+    index_path = TEMPLATES_DIR / "index.html"
+    if not index_path.exists():
+        print(f"⚠️  ВНИМАНИЕ: {index_path} не найден!")
+        print(f"   Убедитесь, что файл index.html лежит в папке: {TEMPLATES_DIR}")
+    
+    uvicorn.run(
+        "demo_mvp:app",
+        host="0.0.0.0",
+        port=8000,
+        reload=False,
+        log_level="info"
+    )
