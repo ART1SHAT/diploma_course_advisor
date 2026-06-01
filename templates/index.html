@@ -251,7 +251,7 @@
 <body>
     <div class="page">
         <header class="hero">
-            <h1>Разработка информационно – советующей системы для выбора программы обучения на основе лингвистической модели</h1>
+            <h1>Информационно – советующая система для выбора программы обучения на основе лингвистической модели</h1>
         </header>
 
         <div class="layout">
@@ -448,9 +448,13 @@
         }
 
         function buildExplainList(exp) {
-            const items = exp.explanations || ['Соответствует заданным критериям профиля.'];
+            const items = exp.explanations || [{ text: 'Соответствует заданным критериям профиля.' }];
             return '<ul class="explain-list">' +
-                items.map(text => '<li>' + escapeHtml(String(text).replace(/^[\u2713\u2717○]\s*/, '')) + '</li>').join('') +
+                items.map(item => {
+                    // Если это объект — берём поле text, иначе используем как есть
+                    const text = typeof item === 'object' ? (item.text || item) : item;
+                    return '<li>' + escapeHtml(String(text).replace(/^[\u2713\u2717○]\s*/, '')) + '</li>';
+                }).join('') +
                 '</ul>';
         }
 
