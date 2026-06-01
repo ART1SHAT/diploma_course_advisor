@@ -1,12 +1,8 @@
-fastapi
-uvicorn
-pandas
-sentence-transformers
-scikit-learn
-scikit-fuzzy
-requests
-beautifulsoup4
-sqlalchemy
-jinja2
-python-multipart
+# Зависимости для запуска MVP (demo_mvp.py / app.main)
+fastapi>=0.100.0
+uvicorn>=0.23.0
+jinja2>=3.1.0
+python-multipart>=0.0.6
+pandas>=2.0.0
 numpy>=1.24.0
+sentence-transformers>=2.2.0

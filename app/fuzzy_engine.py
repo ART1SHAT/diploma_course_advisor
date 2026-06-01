@@ -1,8 +1,11 @@
 # app/fuzzy_engine.py
+import logging
 from typing import Dict, List, Optional
 from dataclasses import dataclass
 import math
 import pandas as pd
+
+logger = logging.getLogger(__name__)
 
 @dataclass
 class FuzzyTerm:
@@ -164,29 +167,63 @@ class FuzzyInferenceEngine:
         
         return conclusions
     
-    def get_trace(self, user_profile: Dict[str, float]) -> List[Dict]:
-        """Возвращает трассировку для объяснений"""
-        trace = []
-        fuzzified = {var: self.evaluate_variable(var, val) 
-                    for var, val in user_profile.items() if var in self.variables}
-        
+    def get_trace(self, user_profile: Optional[Dict[str, float]]) -> List[Dict]:
+        """Возвращает трассировку для объяснений с нормализованными активациями."""
+        if not user_profile:
+            return []
+
+        trace: List[Dict] = []
+        fuzzified = {
+            var: self.evaluate_variable(var, val)
+            for var, val in user_profile.items()
+            if var in self.variables
+        }
+
+        if not fuzzified:
+            return []
+
         for rule in self.rules:
+            conditions = rule.get("conditions") or []
+            if not conditions:
+                logger.warning("Правило %s без условий — пропуск", rule.get("id", "?"))
+                continue
+
             activation = 1.0
-            details = []
-            for cond in rule["conditions"]:
+            details: List[str] = []
+            for cond in conditions:
                 var, term = cond["var"], cond["term"]
-                if var in fuzzified and term in fuzzified[var]:
-                    deg = fuzzified[var][term]
-                    details.append(f"{var}={term}: {deg:.2f}")
-                    activation = min(activation, deg * cond.get("weight", 1.0))
+                if var not in fuzzified or term not in fuzzified[var]:
+                    activation = 0.0
+                    break
+                deg = fuzzified[var][term]
+                details.append(f"{var}={term}: {deg:.2f}")
+                activation = min(activation, deg * cond.get("weight", 1.0))
+
+            if not details:
+                continue
+
             if activation > 0.1:
                 trace.append({
                     "rule_id": rule["id"],
                     "rule_name": rule["name"],
                     "activation": activation,
+                    "activation_raw": activation,
                     "details": details,
-                    "conclusion": rule["conclusion"]["type"]
+                    "conclusion": rule["conclusion"]["type"],
                 })
+
+        if not trace:
+            return []
+
+        max_act = max(t["activation"] for t in trace)
+        if max_act > 0:
+            for t in trace:
+                t["activation_normalized"] = round(t["activation"] / max_act, 4)
+                t["activation"] = round(t["activation_normalized"], 4)
+        else:
+            for t in trace:
+                t["activation_normalized"] = 0.0
+
         return trace
     
     def calibrate_from_data(self, df: "pd.DataFrame" = None, budget_col: str = "price", duration_col: str = "duration_weeks"):
@@ -210,4 +247,4 @@ class FuzzyInferenceEngine:
             self.variables["time_availability"]["medium"].params = [2, d_q.iloc[0], d_q.iloc[1]]
             self.variables["time_availability"]["long"].params = [d_q.iloc[0], d_q.iloc[1], 24, 24]
             
-        print("📊 Термы нечётких переменных откалиброваны по квантилям датасета")
+        logger.info("Термы нечётких переменных откалиброваны по квантилям датасета")

@@ -1,77 +1,65 @@
-# app/main.py — исправленная версия
-from pathlib import Path
-from fastapi import FastAPI, Request, HTTPException
+"""
+Точка сборки FastAPI-приложения CourseAdvisor.
+Запуск через demo_mvp.py или: uvicorn app.main:app
+"""
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import HTMLResponse, JSONResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel, Field
-from typing import List, Optional
 
-from app.recommender import HybridRecommender
-from app.user_profile import UserProfile
+from app.api.routes import router as api_router
+from app.dependencies import TEMPLATES_DIR
 
-app = FastAPI(title="CourseAdvisor", version="1.0.0")
+# Экспорт для demo_mvp и тестов
+__all__ = ["app", "create_app", "TEMPLATES_DIR"]
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
 
-# Инициализация рекомендателя (ленивая загрузка)
-_recommender = None
+def create_app() -> FastAPI:
+    """Фабрика приложения: маршруты, шаблоны, обработчики ошибок."""
+    application = FastAPI(title="CourseAdvisor MVP", version="1.0.0")
+    templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 
-def get_recommender():
-    global _recommender
-    if _recommender is None:
-        print("🔄 Загрузка курсов...")
-        _recommender = HybridRecommender(csv_path="data/courses_processed.csv")
-        print(f"✅ Загружено {_recommender.loader.load().shape[0]} курсов")
-    return _recommender
-
-class RecommendationRequest(BaseModel):
-    budget: Optional[float] = Field(default=None, ge=0)
-    knowledge_level: Optional[float] = Field(default=None, ge=0, le=10)
-    time_availability: Optional[float] = Field(default=None, ge=0)
-    career_focus: Optional[float] = Field(default=None, ge=0, le=1)
-    interests: List[str] = Field(default_factory=list)
-    goals: str = Field(default="")
-
-@app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
-@app.post("/api/recommend")
-async def recommend_api(req: RecommendationRequest):
-    """JSON API для рекомендаций"""
-    try:
-        rec = get_recommender()
-        profile = UserProfile(
-            budget=req.budget,
-            knowledge_level=req.knowledge_level,
-            time_availability=req.time_availability,
-            career_focus=req.career_focus,
-            interests=req.interests,
-            goals=req.goals
+    @application.exception_handler(RequestValidationError)
+    async def validation_exception_handler(
+        request: Request, exc: RequestValidationError
+    ):
+        """422 — понятное сообщение при неверном JSON/полях."""
+        errors = exc.errors()
+        fields = ", ".join(
+            ".".join(str(p) for p in err.get("loc", ()) if p != "body")
+            for err in errors
         )
-        recommendations = rec.recommend(profile, top_k=5)
-        explanations = {c["id"]: rec.explain(profile, c) for c in recommendations}
-        return {
-            "recommendations": recommendations,
-            "explanations": explanations,
-            "meta": {
-                "fuzzy_rules_count": 5,
-                "total_courses_in_db": rec.loader.load().shape[0]
-            }
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        message = (
+            f"Некорректные данные запроса ({fields})."
+            if fields
+            else "Некорректные данные запроса."
+        )
+        return JSONResponse(
+            status_code=422,
+            content={"detail": message, "errors": errors},
+        )
 
-@app.get("/api/health")
-async def health():
-    return {"status": "ok", "components": ["fuzzy_engine", "recommender", "course_loader"]}
+    @application.exception_handler(Exception)
+    async def unhandled_exception_handler(request: Request, exc: Exception):
+        """500 — необработанные исключения вне HTTPException."""
+        if isinstance(exc, HTTPException):
+            raise exc
+        return JSONResponse(
+            status_code=500,
+            content={"detail": f"Внутренняя ошибка сервера: {exc}"},
+        )
 
-# Статика
-app.mount("/static", StaticFiles(directory="templates"), name="static")
+    @application.get("/", response_class=HTMLResponse)
+    async def home(request: Request):
+        return templates.TemplateResponse(
+            request,
+            "index.html",
+            {"request": request},
+        )
 
-if __name__ == "__main__":
-    import uvicorn
-    print("🎓 CourseAdvisor запущен: http://localhost:8000")
-    uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=False)
+    application.include_router(api_router, prefix="/api")
+
+    return application
+
+
+app = create_app()
