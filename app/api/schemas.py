@@ -56,3 +56,53 @@ class DialogStepResponse(BaseModel):
     is_ready_for_recommend: bool
     profile_preview: Dict[str, Any] = Field(default_factory=dict)
     meta: Dict[str, Any] = Field(default_factory=dict)
+
+
+class WhatIfRequest(BaseModel):
+    """Тело POST /api/explain/what_if — контрфактуальный анализ (§3.3)."""
+
+    course_id: str
+    base_profile: RecommendationRequest
+    changed_profile: Dict[str, Any] = Field(
+        default_factory=dict,
+        description="Изменённые поля профиля, напр. {\"budget\": 60000}",
+    )
+
+
+class WhatIfResponse(BaseModel):
+    """Ответ контрфактуального анализа."""
+
+    course_id: str
+    old_rank: int
+    new_rank: int
+    delta_rank: int
+    old_score: Optional[float] = None
+    new_score: Optional[float] = None
+    explanation: str
+    changed_fields: Dict[str, Any] = Field(default_factory=dict)
+
+
+class GraphNode(BaseModel):
+    """Узел графа компетенций для визуализации."""
+
+    id: str
+    label: str
+    type: str
+
+
+class GraphEdge(BaseModel):
+    """Ребро графа компетенций."""
+
+    source: str
+    target: str
+    relation: str = ""
+
+
+class GraphResponse(BaseModel):
+    """Ответ GET /api/graph/{course_id} (§2.1)."""
+
+    nodes: List[GraphNode]
+    edges: List[GraphEdge]
+    explanation_path: str
+    course_id: str
+    profession: str

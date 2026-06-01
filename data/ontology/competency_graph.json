@@ -1,0 +1,36 @@
+{
+  "skills": {
+    "python": ["data_analyst", "backend_dev", "ml_engineer"],
+    "pandas": ["data_analyst"],
+    "sql": ["data_analyst", "backend_dev"],
+    "statistics": ["data_analyst"],
+    "numpy": ["data_analyst", "ml_engineer"],
+    "fastapi": ["backend_dev"],
+    "django": ["backend_dev"],
+    "flask": ["backend_dev"],
+    "javascript": ["frontend_dev", "fullstack_dev"],
+    "react": ["frontend_dev"],
+    "docker": ["devops", "backend_dev"],
+    "machine_learning": ["ml_engineer"],
+    "data_visualization": ["data_analyst"],
+    "веб-разработка": ["frontend_dev", "fullstack_dev"]
+  },
+  "courses": {
+    "stepik_289612": {
+      "skills": ["python"],
+      "professions": ["data_analyst", "backend_dev"]
+    },
+    "stepik_289586": {
+      "skills": ["python", "веб-разработка"],
+      "professions": ["backend_dev", "fullstack_dev"]
+    },
+    "demo_data_analytics": {
+      "skills": ["python", "pandas", "sql", "statistics"],
+      "professions": ["data_analyst"]
+    },
+    "demo_backend": {
+      "skills": ["python", "fastapi", "sql", "docker"],
+      "professions": ["backend_dev", "devops"]
+    }
+  }
+}

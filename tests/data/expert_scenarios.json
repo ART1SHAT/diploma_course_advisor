@@ -1,0 +1,405 @@
+{
+  "version": "1.0",
+  "description": "Экспертные сценарии для offline-оценки (§3.4). expected_top3 — релевантные курсы по экспертной разметке.",
+  "k_default": 5,
+  "scenarios": [
+    {
+      "id": "s01_it_python_junior",
+      "profile": {
+        "budget": 50000,
+        "knowledge_level": 3,
+        "time_availability": 8,
+        "career_focus": 1.0,
+        "interests": [
+          "python"
+        ],
+        "goals": "стать Python-разработчиком"
+      },
+      "expected_top3": [
+        "stepik_286790",
+        "stepik_286051",
+        "stepik_284362"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s02_data_analyst",
+      "profile": {
+        "budget": 60000,
+        "knowledge_level": 5,
+        "time_availability": 10,
+        "career_focus": 1.0,
+        "interests": [
+          "анализ данных",
+          "sql"
+        ],
+        "goals": "работа аналитиком данных"
+      },
+      "expected_top3": [
+        "stepik_288589",
+        "stepik_287896",
+        "stepik_286941"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s03_ml_engineer",
+      "profile": {
+        "budget": 80000,
+        "knowledge_level": 7,
+        "time_availability": 12,
+        "career_focus": 1.0,
+        "interests": [
+          "machine learning",
+          "нейросет"
+        ],
+        "goals": "ML engineer в продуктовой компании"
+      },
+      "expected_top3": [
+        "stepik_286253",
+        "stepik_289071",
+        "stepik_286826"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s04_ege_math_profile",
+      "profile": {
+        "budget": 30000,
+        "knowledge_level": 4,
+        "time_availability": 6,
+        "career_focus": 0.5,
+        "interests": [
+          "егэ",
+          "математика"
+        ],
+        "goals": "сдать профильный ЕГЭ по математике"
+      },
+      "expected_top3": [
+        "stepik_288845",
+        "stepik_287616",
+        "stepik_284871"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s05_ege_russian",
+      "profile": {
+        "budget": 25000,
+        "knowledge_level": 4,
+        "time_availability": 5,
+        "career_focus": 0.5,
+        "interests": [
+          "егэ",
+          "русский"
+        ],
+        "goals": "подготовка к ЕГЭ по русскому языку"
+      },
+      "expected_top3": [
+        "stepik_288605",
+        "stepik_286632",
+        "stepik_284017"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s06_free_history",
+      "profile": {
+        "budget": 0,
+        "knowledge_level": 2,
+        "time_availability": 4,
+        "career_focus": 0.0,
+        "interests": [
+          "история"
+        ],
+        "goals": "бесплатно изучать историю для себя"
+      },
+      "expected_top3": [
+        "stepik_289682",
+        "stepik_289007",
+        "stepik_287919"
+      ],
+      "group": "personal"
+    },
+    {
+      "id": "s07_english_career",
+      "profile": {
+        "budget": 40000,
+        "knowledge_level": 3,
+        "time_availability": 7,
+        "career_focus": 1.0,
+        "interests": [
+          "английский"
+        ],
+        "goals": "английский для карьеры в IT"
+      },
+      "expected_top3": [
+        "stepik_287174",
+        "stepik_289575",
+        "stepik_289069"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s08_web_frontend",
+      "profile": {
+        "budget": 55000,
+        "knowledge_level": 4,
+        "time_availability": 9,
+        "career_focus": 1.0,
+        "interests": [
+          "javascript",
+          "frontend"
+        ],
+        "goals": "frontend-разработчик"
+      },
+      "expected_top3": [
+        "stepik_289398",
+        "stepik_289162",
+        "stepik_284801"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s09_java_backend",
+      "profile": {
+        "budget": 70000,
+        "knowledge_level": 6,
+        "time_availability": 10,
+        "career_focus": 1.0,
+        "interests": [
+          "java",
+          "backend"
+        ],
+        "goals": "Java backend разработчик"
+      },
+      "expected_top3": [
+        "stepik_286837",
+        "stepik_289398",
+        "stepik_289358"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s10_qa_automation",
+      "profile": {
+        "budget": 45000,
+        "knowledge_level": 4,
+        "time_availability": 8,
+        "career_focus": 1.0,
+        "interests": [
+          "тестирование",
+          "автоматизация"
+        ],
+        "goals": "инженер по автоматизации тестирования"
+      },
+      "expected_top3": [
+        "stepik_289358",
+        "stepik_287579",
+        "stepik_287568"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s11_cybersecurity",
+      "profile": {
+        "budget": 90000,
+        "knowledge_level": 6,
+        "time_availability": 11,
+        "career_focus": 1.0,
+        "interests": [
+          "безопасность",
+          "cyber"
+        ],
+        "goals": "специалист по информационной безопасности"
+      },
+      "expected_top3": [
+        "stepik_288868",
+        "stepik_287670",
+        "stepik_287539"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s12_design_ui",
+      "profile": {
+        "budget": 35000,
+        "knowledge_level": 3,
+        "time_availability": 6,
+        "career_focus": 0.5,
+        "interests": [
+          "дизайн",
+          "figma"
+        ],
+        "goals": "UI/UX дизайнер"
+      },
+      "expected_top3": [
+        "stepik_289343",
+        "stepik_289200",
+        "stepik_287801"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s13_marketing_digital",
+      "profile": {
+        "budget": 40000,
+        "knowledge_level": 3,
+        "time_availability": 7,
+        "career_focus": 1.0,
+        "interests": [
+          "маркетинг",
+          "smm"
+        ],
+        "goals": "digital-маркетолог"
+      },
+      "expected_top3": [
+        "stepik_284011",
+        "stepik_288358",
+        "stepik_286097"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s14_finance_accounting",
+      "profile": {
+        "budget": 50000,
+        "knowledge_level": 5,
+        "time_availability": 8,
+        "career_focus": 1.0,
+        "interests": [
+          "финансы",
+          "бухгалтерия"
+        ],
+        "goals": "финансовый аналитик"
+      },
+      "expected_top3": [
+        "stepik_285490",
+        "stepik_284494",
+        "stepik_289218"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s15_physics_ege",
+      "profile": {
+        "budget": 28000,
+        "knowledge_level": 5,
+        "time_availability": 6,
+        "career_focus": 0.5,
+        "interests": [
+          "физика",
+          "егэ"
+        ],
+        "goals": "ЕГЭ по физике на 80+ баллов"
+      },
+      "expected_top3": [
+        "stepik_283043",
+        "stepik_289476",
+        "stepik_288845"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s16_bio_medicine",
+      "profile": {
+        "budget": 35000,
+        "knowledge_level": 6,
+        "time_availability": 5,
+        "career_focus": 0.5,
+        "interests": [
+          "биология",
+          "медицина"
+        ],
+        "goals": "поступление на медицинский"
+      },
+      "expected_top3": [
+        "stepik_288551",
+        "stepik_286616",
+        "stepik_286413"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s17_gamedev",
+      "profile": {
+        "budget": 60000,
+        "knowledge_level": 5,
+        "time_availability": 12,
+        "career_focus": 1.0,
+        "interests": [
+          "unity",
+          "игры"
+        ],
+        "goals": "разработчик игр на Unity"
+      },
+      "expected_top3": [
+        "stepik_287620",
+        "stepik_286166",
+        "stepik_289674"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s18_sql_database",
+      "profile": {
+        "budget": 50000,
+        "knowledge_level": 5,
+        "time_availability": 8,
+        "career_focus": 1.0,
+        "interests": [
+          "sql",
+          "база данных"
+        ],
+        "goals": "администратор баз данных"
+      },
+      "expected_top3": [
+        "stepik_289203",
+        "stepik_287080",
+        "stepik_285876"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s19_devops",
+      "profile": {
+        "budget": 85000,
+        "knowledge_level": 7,
+        "time_availability": 10,
+        "career_focus": 1.0,
+        "interests": [
+          "devops",
+          "docker",
+          "kubernetes"
+        ],
+        "goals": "DevOps-инженер"
+      },
+      "expected_top3": [
+        "stepik_286490",
+        "stepik_289494",
+        "stepik_286610"
+      ],
+      "group": "career"
+    },
+    {
+      "id": "s20_soft_skills",
+      "profile": {
+        "budget": 20000,
+        "knowledge_level": 3,
+        "time_availability": 4,
+        "career_focus": 0.0,
+        "interests": [
+          "лидерство",
+          "коммуникация"
+        ],
+        "goals": "развить soft skills для менеджмента"
+      },
+      "expected_top3": [
+        "stepik_289297",
+        "stepik_289056",
+        "stepik_288267"
+      ],
+      "group": "personal"
+    }
+  ]
+}
