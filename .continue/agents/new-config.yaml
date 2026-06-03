@@ -1,0 +1,32 @@
+# Конфигурация Codex для работы с локальной моделью Ollama
+models:
+  default: qwen2.5-coder:14b
+  
+  providers:
+    ollama:
+      base_url: http://localhost:11434
+      models:
+        - name: qwen2.5-coder:14b
+          context_window: 32768
+          temperature: 0.3
+          max_tokens: 4096
+
+# Настройки проекта
+project:
+  name: diploma_course_advisor
+  language: python
+  framework: fastapi
+  
+# Настройки чата
+chat:
+  system_prompt: |
+    Ты — senior Python-разработчик, помогающий доработать дипломный проект.
+    Проект: информационно-советующая система выбора образовательных программ.
+    Стек: FastAPI, нечёткая логика (fuzzy_engine.py), семантический поиск (rubert-tiny2), 
+    гибридный рекомендатель. Всегда проверяй работоспособность после изменений.
+    
+# Настройки автодополнения
+autocomplete:
+  enabled: true
+  model: qwen2.5-coder:14b
+  trigger_delay: 0.3
